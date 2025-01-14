@@ -57,71 +57,74 @@ const Navbar = () => {
             </NavLink>
           </li>
           {user?.email && (
-            <li>
-              <details>
-                <summary className="text-gray-600 dark:text-gray-50">
-                  Dashboard
-                </summary>
-                <ul className="bg-gray-100 dark:bg-gray-800 rounded-t-none p-2 w-40 relative right-1 z-10 top-5">
-                  <li>
-                    <NavLink
-                      to={"/add-task"}
-                      className={({ isActive }) =>
-                        `hover:text-teal-600 ${
-                          isActive
-                            ? "text-teal-600 font-semibold"
-                            : "text-gray-600 dark:text-gray-50"
-                        }`
-                      }
-                    >
-                      Add Task
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={"/manage-task"}
-                      className={({ isActive }) =>
-                        `hover:text-teal-600 ${
-                          isActive
-                            ? "text-teal-600 font-semibold"
-                            : "text-gray-600 dark:text-gray-50"
-                        }`
-                      }
-                    >
-                      Manage task
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={"/my-task"}
-                      className={({ isActive }) =>
-                        `hover:text-teal-600 ${
-                          isActive
-                            ? "text-teal-600 font-semibold"
-                            : "text-gray-600 dark:text-gray-50"
-                        }`
-                      }
-                    >
-                      My Task
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={"/service-to-do"}
-                      className={({ isActive }) =>
-                        `hover:text-teal-600 ${
-                          isActive
-                            ? "text-teal-600 font-semibold"
-                            : "text-gray-600 dark:text-gray-50"
-                        }`
-                      }
-                    >
-                      coming soon
-                    </NavLink>
-                  </li>
-                </ul>
-              </details>
-            </li>
+            <>
+              <li>
+                <details>
+                  <summary className="text-gray-600 dark:text-gray-50">
+                    Dashboard
+                  </summary>
+                  <ul className="bg-gray-100 dark:bg-gray-800 rounded-t-none p-2 w-40 relative right-1 z-10 top-5">
+                    <li>
+                      <NavLink
+                        to={"/add-task"}
+                        className={({ isActive }) =>
+                          `hover:text-teal-600 ${
+                            isActive
+                              ? "text-teal-600 font-semibold"
+                              : "text-gray-600 dark:text-gray-50"
+                          }`
+                        }
+                      >
+                        Add Task
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/manage-task"}
+                        className={({ isActive }) =>
+                          `hover:text-teal-600 ${
+                            isActive
+                              ? "text-teal-600 font-semibold"
+                              : "text-gray-600 dark:text-gray-50"
+                          }`
+                        }
+                      >
+                        Manage task
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/my-task"}
+                        className={({ isActive }) =>
+                          `hover:text-teal-600 ${
+                            isActive
+                              ? "text-teal-600 font-semibold"
+                              : "text-gray-600 dark:text-gray-50"
+                          }`
+                        }
+                      >
+                        My Task
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/service-to-do"}
+                        className={({ isActive }) =>
+                          `hover:text-teal-600 ${
+                            isActive
+                              ? "text-teal-600 font-semibold"
+                              : "text-gray-600 dark:text-gray-50"
+                          }`
+                        }
+                      >
+                        coming soon
+                      </NavLink>
+                    </li>
+                  </ul>
+                </details>
+              </li>
+              <li className="text-deepTeal font-bold bg-gray-100 py-1 px-2 rounded-lg">Coin</li>
+            </>
           )}
         </ul>
       </div>

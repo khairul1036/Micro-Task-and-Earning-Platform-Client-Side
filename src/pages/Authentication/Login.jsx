@@ -3,7 +3,7 @@ import bgImg from "../../assets/images/register.jpg";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
-
+import { saveUser } from "../../api/utils";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,7 +15,8 @@ const Login = () => {
   // Google Signin
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
+      const data = await signInWithGoogle();
+      await saveUser(data?.user);
       toast.success("Signin Successful");
       navigate(from, { replace: true });
     } catch (err) {
