@@ -76,9 +76,9 @@ const Sidebar = () => {
               Tasklist
             </Link>
             <Link
-              to="/my-submissions"
+              to="/dashboard/my-submissions"
               className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/my-submissions")
+                isActive("/dashboard/my-submissions")
                   ? "bg-gray-700"
                   : "hover:bg-gray-600"
               }`}

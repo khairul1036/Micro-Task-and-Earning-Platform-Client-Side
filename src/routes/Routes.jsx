@@ -12,6 +12,8 @@ import PurchaseCoin from "../pages/Buyer/PurchaseCoin";
 import PaymentHistory from "../pages/Buyer/PaymentHistory";
 import TaskList from "../pages/Worker/TaskList";
 import TaskDetails from "../pages/Worker/TaskDetails";
+import MySubmission from "../pages/Worker/MySubmission";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +38,11 @@ const router = createBrowserRouter([
   // buyer routes
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
@@ -69,7 +75,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/task-details/:id",
-        element: <TaskDetails/>,
+        element: <TaskDetails />,
+      },
+      {
+        path: "/dashboard/my-submissions",
+        element: <MySubmission />,
       },
     ],
   },
