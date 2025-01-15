@@ -15,6 +15,7 @@ import TaskDetails from "../pages/Worker/TaskDetails";
 import MySubmission from "../pages/Worker/MySubmission";
 import PrivateRoute from "./PrivateRoute";
 import WithDrawals from "../pages/Worker/WithDrawals";
+import BuyerRoute from "./BuyerRoute";
 
 const router = createBrowserRouter([
   {
@@ -51,40 +52,70 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/add-new-task",
-        element: <AddTask />,
+        element: (
+          <PrivateRoute>
+            <BuyerRoute>
+              <AddTask />
+            </BuyerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/my-task",
-        element: <MyTasks />,
+        element: (
+          <PrivateRoute>
+            <BuyerRoute>
+              <MyTasks />
+            </BuyerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/update-myTask/:id",
-        element: <UpdateMyTask />,
+        element: (
+          <PrivateRoute>
+            <BuyerRoute>
+              <UpdateMyTask />
+            </BuyerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/purchase-coin",
-        element: <PurchaseCoin />,
+        element: (
+          <PrivateRoute>
+            <BuyerRoute>
+              <PurchaseCoin />
+            </BuyerRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/payment-history",
-        element: <PaymentHistory />,
+        element: (
+          <PrivateRoute>
+            <BuyerRoute>
+              <PaymentHistory />
+            </BuyerRoute>
+          </PrivateRoute>
+        ),
       },
       // worker routes
       {
         path: "/dashboard/tasklist",
-        element: <TaskList />,
+        element: <PrivateRoute><TaskList /></PrivateRoute>,
       },
       {
         path: "/dashboard/task-details/:id",
-        element: <TaskDetails />,
+        element: <PrivateRoute><TaskDetails /></PrivateRoute>,
       },
       {
         path: "/dashboard/my-submissions",
-        element: <MySubmission />,
+        element: <PrivateRoute><MySubmission /></PrivateRoute>,
       },
       {
         path: "/dashboard/withdrawals",
-        element: <WithDrawals/>,
+        element: <PrivateRoute><WithDrawals /></PrivateRoute>,
       },
     ],
   },

@@ -13,12 +13,14 @@ import {
   FaUserCog,
 } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
+import useRole from "../../hooks/useRole";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation(); // Get current location
   const navigate = useNavigate();
+  const [role, isLoading] = useRole();
 
   // Function to toggle sidebar visibility on mobile
   const toggleSidebar = () => {
@@ -57,108 +59,130 @@ const Sidebar = () => {
           {/* Navigation Links */}
           <div className="space-y-2 px-5 py-3">
             {/* worker */}
-            <Link
-              to="/dashboard"
-              className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/dashboard") ? "bg-gray-700" : "hover:bg-gray-600"
-              }`}
-            >
-              <FaHome className="mr-3" />
-              Home
-            </Link>
-            <Link
-              to="/dashboard/tasklist"
-              className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/dashboard/tasklist") ? "bg-gray-700" : "hover:bg-gray-600"
-              }`}
-            >
-              <FaTasks className="mr-3" />
-              Tasklist
-            </Link>
-            <Link
-              to="/dashboard/my-submissions"
-              className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/dashboard/my-submissions")
-                  ? "bg-gray-700"
-                  : "hover:bg-gray-600"
-              }`}
-            >
-              <FaTasks className="mr-3" />
-              My Submissions
-            </Link>
-            <Link
-              to="/dashboard/withdrawals"
-              className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/dashboard/withdrawals") ? "bg-gray-700" : "hover:bg-gray-600"
-              }`}
-            >
-              <FaMoneyBillWave className="mr-3" />
-              Withdrawals
-            </Link>
+            {role === "Worker" && (
+              <>
+                <Link
+                  to="/dashboard"
+                  className={`block py-2 px-4 rounded flex items-center ${
+                    isActive("/dashboard") ? "bg-gray-700" : "hover:bg-gray-600"
+                  }`}
+                >
+                  <FaHome className="mr-3" />
+                  Home
+                </Link>
+                <Link
+                  to="/dashboard/tasklist"
+                  className={`block py-2 px-4 rounded flex items-center ${
+                    isActive("/dashboard/tasklist")
+                      ? "bg-gray-700"
+                      : "hover:bg-gray-600"
+                  }`}
+                >
+                  <FaTasks className="mr-3" />
+                  Tasklist
+                </Link>
+                <Link
+                  to="/dashboard/my-submissions"
+                  className={`block py-2 px-4 rounded flex items-center ${
+                    isActive("/dashboard/my-submissions")
+                      ? "bg-gray-700"
+                      : "hover:bg-gray-600"
+                  }`}
+                >
+                  <FaTasks className="mr-3" />
+                  My Submissions
+                </Link>
+                <Link
+                  to="/dashboard/withdrawals"
+                  className={`block py-2 px-4 rounded flex items-center ${
+                    isActive("/dashboard/withdrawals")
+                      ? "bg-gray-700"
+                      : "hover:bg-gray-600"
+                  }`}
+                >
+                  <FaMoneyBillWave className="mr-3" />
+                  Withdrawals
+                </Link>
+              </>
+            )}
 
-            <p className="divider">buyer</p>
             {/* buyer */}
-            <Link
-              to="/dashboard/add-new-task"
-              className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/dashboard/add-new-task")
-                  ? "bg-gray-700"
-                  : "hover:bg-gray-600"
-              }`}
-            >
-              <FaPlusCircle className="mr-3" />
-              Add New Tasks
-            </Link>
-            <Link
-              to="/dashboard/my-task"
-              className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/dashboard/my-task") ? "bg-gray-700" : "hover:bg-gray-600"
-              }`}
-            >
-              <FaPlusCircle className="mr-3" />
-              My Tasks
-            </Link>
-            <Link
-              to="/dashboard/purchase-coin"
-              className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/dashboard/purchase-coin") ? "bg-gray-700" : "hover:bg-gray-600"
-              }`}
-            >
-              <FaCoins className="mr-3" />
-              Purchase Coin
-            </Link>
-            <Link
-              to="/dashboard/payment-history"
-              className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/dashboard/payment-history")
-                  ? "bg-gray-700"
-                  : "hover:bg-gray-600"
-              }`}
-            >
-              <FaHistory className="mr-3" />
-              Payment History
-            </Link>
+            {role === "Buyer" && (
+              <>
+                <Link
+                  to="/dashboard/add-new-task"
+                  className={`block py-2 px-4 rounded flex items-center ${
+                    isActive("/dashboard/add-new-task")
+                      ? "bg-gray-700"
+                      : "hover:bg-gray-600"
+                  }`}
+                >
+                  <FaPlusCircle className="mr-3" />
+                  Add New Tasks
+                </Link>
+                <Link
+                  to="/dashboard/my-task"
+                  className={`block py-2 px-4 rounded flex items-center ${
+                    isActive("/dashboard/my-task")
+                      ? "bg-gray-700"
+                      : "hover:bg-gray-600"
+                  }`}
+                >
+                  <FaPlusCircle className="mr-3" />
+                  My Tasks
+                </Link>
+                <Link
+                  to="/dashboard/purchase-coin"
+                  className={`block py-2 px-4 rounded flex items-center ${
+                    isActive("/dashboard/purchase-coin")
+                      ? "bg-gray-700"
+                      : "hover:bg-gray-600"
+                  }`}
+                >
+                  <FaCoins className="mr-3" />
+                  Purchase Coin
+                </Link>
+                <Link
+                  to="/dashboard/payment-history"
+                  className={`block py-2 px-4 rounded flex items-center ${
+                    isActive("/dashboard/payment-history")
+                      ? "bg-gray-700"
+                      : "hover:bg-gray-600"
+                  }`}
+                >
+                  <FaHistory className="mr-3" />
+                  Payment History
+                </Link>
+              </>
+            )}
 
-            <p className="divider">admin</p>
             {/* admin */}
-            <Link
-              to="/manage-users"
-              className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/manage-users") ? "bg-gray-700" : "hover:bg-gray-600"
-              }`}
-            >
-              <FaUserCog className="mr-3" />
-              Manage Users
-            </Link>
-            <Link
-              to="/manage-task"
-              className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/manage-task") ? "bg-gray-700" : "hover:bg-gray-600"
-              }`}
-            >
-              <FaUserCog className="mr-3" />
-              Manage Task
-            </Link>
+            {role === "Admin" && (
+              <>
+                <Link
+                  to="/manage-users"
+                  className={`block py-2 px-4 rounded flex items-center ${
+                    isActive("/manage-users")
+                      ? "bg-gray-700"
+                      : "hover:bg-gray-600"
+                  }`}
+                >
+                  <FaUserCog className="mr-3" />
+                  Manage Users
+                </Link>
+                <Link
+                  to="/manage-task"
+                  className={`block py-2 px-4 rounded flex items-center ${
+                    isActive("/manage-task")
+                      ? "bg-gray-700"
+                      : "hover:bg-gray-600"
+                  }`}
+                >
+                  <FaUserCog className="mr-3" />
+                  Manage Task
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Optional Logout Section */}
