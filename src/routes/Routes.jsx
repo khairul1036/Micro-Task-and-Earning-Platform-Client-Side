@@ -16,6 +16,9 @@ import MySubmission from "../pages/Worker/MySubmission";
 import PrivateRoute from "./PrivateRoute";
 import WithDrawals from "../pages/Worker/WithDrawals";
 import BuyerRoute from "./BuyerRoute";
+import AdminRoute from "./AdminRoute";
+import ManageUsers from "../pages/Admin/ManageUsers";
+import ManageTasks from "../pages/Admin/ManageTasks";
 
 const router = createBrowserRouter([
   {
@@ -103,19 +106,56 @@ const router = createBrowserRouter([
       // worker routes
       {
         path: "/dashboard/tasklist",
-        element: <PrivateRoute><TaskList /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <TaskList />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/task-details/:id",
-        element: <PrivateRoute><TaskDetails /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <TaskDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/my-submissions",
-        element: <PrivateRoute><MySubmission /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MySubmission />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/withdrawals",
-        element: <PrivateRoute><WithDrawals /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <WithDrawals />
+          </PrivateRoute>
+        ),
+      },
+      // admin routes
+      {
+        path: "/dashboard/manage-users",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageUsers />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manage-task",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageTasks/>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
     ],
   },

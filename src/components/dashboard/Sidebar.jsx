@@ -160,9 +160,9 @@ const Sidebar = () => {
             {role === "Admin" && (
               <>
                 <Link
-                  to="/manage-users"
+                  to="/dashboard/manage-users"
                   className={`block py-2 px-4 rounded flex items-center ${
-                    isActive("/manage-users")
+                    isActive("/dashboard/manage-users")
                       ? "bg-gray-700"
                       : "hover:bg-gray-600"
                   }`}
@@ -171,9 +171,9 @@ const Sidebar = () => {
                   Manage Users
                 </Link>
                 <Link
-                  to="/manage-task"
+                  to="/dashboard/manage-task"
                   className={`block py-2 px-4 rounded flex items-center ${
-                    isActive("/manage-task")
+                    isActive("/dashboard/manage-task")
                       ? "bg-gray-700"
                       : "hover:bg-gray-600"
                   }`}
