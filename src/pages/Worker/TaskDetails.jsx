@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { format } from "date-fns";
 import useAuth from "../../hooks/useAuth";
@@ -9,6 +9,7 @@ const TaskDetails = () => {
   const { user } = useAuth();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   const { data: task = {} } = useQuery({
     queryKey: ["task", id],
@@ -41,7 +42,7 @@ const TaskDetails = () => {
       submission_details,
       worker: {
         email: user?.email,
-        name: user?.name,
+        name: user?.displayName,
       },
       buyer: {
         email: buyer?.email,
@@ -55,7 +56,7 @@ const TaskDetails = () => {
     try {
       const data = await axiosSecure.post("/add-submission", submissionData);
       toast.success("Task added successfully");
-    //   navigate("/dashboard/my-task");
+      navigate("/dashboard/my-submissions");
     } catch (err) {
       toast.error(err?.message);
       console.log(err);

@@ -14,6 +14,7 @@ import TaskList from "../pages/Worker/TaskList";
 import TaskDetails from "../pages/Worker/TaskDetails";
 import MySubmission from "../pages/Worker/MySubmission";
 import PrivateRoute from "./PrivateRoute";
+import WithDrawals from "../pages/Worker/WithDrawals";
 
 const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/my-submissions",
         element: <MySubmission />,
+      },
+      {
+        path: "/dashboard/withdrawals",
+        element: <WithDrawals/>,
       },
     ],
   },

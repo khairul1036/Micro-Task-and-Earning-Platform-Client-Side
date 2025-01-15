@@ -87,9 +87,9 @@ const Sidebar = () => {
               My Submissions
             </Link>
             <Link
-              to="/withdrawals"
+              to="/dashboard/withdrawals"
               className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/withdrawals") ? "bg-gray-700" : "hover:bg-gray-600"
+                isActive("/dashboard/withdrawals") ? "bg-gray-700" : "hover:bg-gray-600"
               }`}
             >
               <FaMoneyBillWave className="mr-3" />
