@@ -119,18 +119,18 @@ const Sidebar = () => {
               My Tasks
             </Link>
             <Link
-              to="/purchase-coin"
+              to="/dashboard/purchase-coin"
               className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/purchase-coin") ? "bg-gray-700" : "hover:bg-gray-600"
+                isActive("/dashboard/purchase-coin") ? "bg-gray-700" : "hover:bg-gray-600"
               }`}
             >
               <FaCoins className="mr-3" />
               Purchase Coin
             </Link>
             <Link
-              to="/payment-history"
+              to="/dashboard/payment-history"
               className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/payment-history")
+                isActive("/dashboard/payment-history")
                   ? "bg-gray-700"
                   : "hover:bg-gray-600"
               }`}

@@ -38,7 +38,7 @@ const AddTask = () => {
     // the coin validation
     if (calculate_amount > parseInt(users?.coins)) {
       toast.error("Not available Coin.  Purchase Coin ");
-      navigate("/"); // navigate to purchase page
+      navigate("/dashboard/purchase-coin"); // navigate to purchase page
       return;
     }
 
