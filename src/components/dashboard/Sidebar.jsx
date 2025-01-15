@@ -67,9 +67,9 @@ const Sidebar = () => {
               Home
             </Link>
             <Link
-              to="/tasklist"
+              to="/dashboard/tasklist"
               className={`block py-2 px-4 rounded flex items-center ${
-                isActive("/tasklist") ? "bg-gray-700" : "hover:bg-gray-600"
+                isActive("/dashboard/tasklist") ? "bg-gray-700" : "hover:bg-gray-600"
               }`}
             >
               <FaTasks className="mr-3" />

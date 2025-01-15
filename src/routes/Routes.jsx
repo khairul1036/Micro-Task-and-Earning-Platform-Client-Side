@@ -10,6 +10,8 @@ import MyTasks from "../pages/Buyer/MyTasks";
 import UpdateMyTask from "../pages/Buyer/UpdateMyTask";
 import PurchaseCoin from "../pages/Buyer/PurchaseCoin";
 import PaymentHistory from "../pages/Buyer/PaymentHistory";
+import TaskList from "../pages/Worker/TaskList";
+import TaskDetails from "../pages/Worker/TaskDetails";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // buyer routes
   {
     path: "/dashboard",
     element: <DashboardLayout />,
@@ -49,15 +52,24 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/update-myTask/:id",
-        element: <UpdateMyTask/>,
+        element: <UpdateMyTask />,
       },
       {
         path: "/dashboard/purchase-coin",
-        element: <PurchaseCoin/>,
+        element: <PurchaseCoin />,
       },
       {
         path: "/dashboard/payment-history",
-        element: <PaymentHistory/>,
+        element: <PaymentHistory />,
+      },
+      // worker routes
+      {
+        path: "/dashboard/tasklist",
+        element: <TaskList />,
+      },
+      {
+        path: "/dashboard/task-details/:id",
+        element: <TaskDetails/>,
       },
     ],
   },
