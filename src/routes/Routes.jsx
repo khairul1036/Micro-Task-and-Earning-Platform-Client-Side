@@ -3,6 +3,11 @@ import Main from "../layouts/Main";
 import Login from "../pages/Authentication/Login";
 import Register from "../pages/Authentication/Register";
 import Home from "../pages/langdingPages/Home";
+import DashboardLayout from "../layouts/DashboardLayout";
+import BuyerHome from "../pages/Buyer/BuyerHome";
+import AddTask from "../pages/Buyer/AddTask";
+import MyTasks from "../pages/Buyer/MyTasks";
+import UpdateMyTask from "../pages/Buyer/UpdateMyTask";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +26,28 @@ const router = createBrowserRouter([
       {
         path: "/registration",
         element: <Register />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        index: true,
+        element: <BuyerHome />,
+      },
+      {
+        path: "/dashboard/add-new-task",
+        element: <AddTask />,
+      },
+      {
+        path: "/dashboard/my-task",
+        element: <MyTasks />,
+      },
+      {
+        path: "/dashboard/update-myTask/:id",
+        element: <UpdateMyTask/>,
       },
     ],
   },
