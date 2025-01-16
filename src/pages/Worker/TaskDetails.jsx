@@ -38,7 +38,7 @@ const TaskDetails = () => {
     const submissionData = {
       task_id: _id,
       task_title,
-      payable_amount,
+      payable_amount: parseInt(payable_amount),
       submission_details,
       worker: {
         email: user?.email,

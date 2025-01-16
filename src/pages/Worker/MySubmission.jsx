@@ -17,7 +17,6 @@ const MySubmission = () => {
       return data;
     },
   });
-  console.log(mySubmissions);
 
   return (
     <section className="container px-4 mx-auto pt-12">

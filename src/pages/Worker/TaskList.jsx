@@ -13,7 +13,7 @@ const TaskList = () => {
       return data;
     },
   });
-  console.log(allTask);
+
   return (
     <div className="p-8">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">

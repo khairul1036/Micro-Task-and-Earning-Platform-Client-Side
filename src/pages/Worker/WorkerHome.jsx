@@ -13,7 +13,7 @@ const WorkerHome = () => {
       return data;
     },
   });
-  console.log(data);
+
   return (
     <div className="p-6">
       <h2 className="text-lg font-medium text-gray-800 pb-5">Your States</h2>

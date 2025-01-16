@@ -32,7 +32,7 @@ const MySubmissionTableRow = ({ mySubmission }) => {
       <td className="px-4 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center gap-x-2">
           <p
-            className={`px-3 py-1 ${status === 'Pending' ?  'text-yellow-500 bg-yellow-100/60' :  'text-green-500 bg-green-100/60'} text-xs  rounded-full`}
+            className={`px-3 py-1 ${status === 'Pending' &&  'text-yellow-500 bg-yellow-100/60'} ${status === 'Reject' && 'text-red-500 bg-red-100/60'} ${status === 'Approved' && 'text-green-500 bg-green-100/60'} text-xs  rounded-full`}
           >
             {status}
           </p>

@@ -48,8 +48,8 @@ const AddTask = () => {
       task_detail,
       submission_info,
       completion_date: startDate,
-      payable_amount,
-      required_workers,
+      payable_amount: parseInt(payable_amount),
+      required_workers: parseInt(required_workers),
       total_payable_amount: calculate_amount,
       photoURL,
       buyer: {
