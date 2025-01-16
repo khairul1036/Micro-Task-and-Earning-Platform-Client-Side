@@ -4,6 +4,8 @@ import "./CheckoutForm.css";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ closeModal, selectedPackage }) => {
   const [clientSecret, setClientSecret] = useState();
@@ -12,6 +14,8 @@ const CheckoutForm = ({ closeModal, selectedPackage }) => {
   const axiosSecure = useAxiosSecure();
   const { coins, price } = selectedPackage;
   const { user } = useAuth();
+  const [err, setErr] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosSecure.post("/create-payment-intent", selectedPackage).then((res) => {
@@ -45,9 +49,11 @@ const CheckoutForm = ({ closeModal, selectedPackage }) => {
     });
 
     if (error) {
-      console.log("[error]", error);
+      // console.log("[error]", error);
+      setErr(error.message);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      // console.log("[PaymentMethod]", paymentMethod);
+      setErr("");
     }
 
     // confirm payment
@@ -62,9 +68,11 @@ const CheckoutForm = ({ closeModal, selectedPackage }) => {
         },
       });
     if (confirmError) {
-      console.log("confirm error---------->", confirmError);
+      // console.log("confirm error---------->", confirmError);
+      setErr(confirmError);
     } else {
-      console.log("paymentIntent------>", paymentIntent);
+      // console.log("paymentIntent------>", paymentIntent);
+      setErr("");
       if (paymentIntent.status === "succeeded") {
         // save the payment info in the database
         const payment = {
@@ -75,8 +83,10 @@ const CheckoutForm = ({ closeModal, selectedPackage }) => {
           date: new Date(),
           coins,
         };
-        const res = await axiosSecure.post('/payments', payment)
-        console.log('payment save---->', res);
+        const res = await axiosSecure.post("/payments", payment);
+        // console.log("payment save---->", res);
+        toast.success("Payment Success!!");
+        navigate("/dashboard/payment-history");
       }
     }
   };
@@ -99,6 +109,7 @@ const CheckoutForm = ({ closeModal, selectedPackage }) => {
           },
         }}
       />
+
       <div className="mt-6 flex justify-between">
         <button
           onClick={closeModal}
