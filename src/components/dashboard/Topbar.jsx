@@ -5,7 +5,8 @@ import useAuth from "../../hooks/useAuth";
 import FetchData from "../../hooks/FetchData";
 const Topbar = () => {
   const { user } = useAuth();
-  const { users } = FetchData();
+  const { users, userRefetch } = FetchData();
+  userRefetch()
   // console.log(users);
   return (
     <div className="w-full py-1 bg-deepTeal text-white">

@@ -2,12 +2,14 @@ import { useState } from "react";
 import FetchData from "../../hooks/FetchData";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 
 const WithDrawals = () => {
   const { users } = FetchData();
   const axiosSecure = useAxiosSecure();
   const [coinsToWithdraw, setCoinsToWithdraw] = useState(0);
   const [paymentSystem, setPaymentSystem] = useState("");
+  const navigate = useNavigate()
 
   // Calculate the withdrawal amount in dollars
   const withdrawAmount = coinsToWithdraw / 20;
@@ -20,8 +22,8 @@ const WithDrawals = () => {
     const formData = {
       worker_email: users?.email,
       worker_name: users?.name,
-      withdrawal_coin: coinsToWithdraw,
-      withdrawal_amount: withdrawAmount,
+      withdrawal_coin: parseInt(coinsToWithdraw),
+      withdrawal_amount: parseFloat(withdrawAmount).toFixed(1),
       payment_system: paymentSystem,
       account_number: accountNumber,
       withdraw_date: new Date(),
@@ -29,7 +31,8 @@ const WithDrawals = () => {
 
     try {
       const { data } = await axiosSecure.post("/withdraw", formData);
-      toast.success("with draw requested success!!");
+      toast.success("Withdraw requested success!!");
+      navigate('/dashboard')
     } catch (err) {
       console.log(err);
       toast.error(err);
