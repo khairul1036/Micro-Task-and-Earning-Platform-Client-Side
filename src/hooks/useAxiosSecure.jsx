@@ -2,6 +2,7 @@ import axios from "axios";
 import useAuth from "./useAuth";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export const axiosSecure = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -17,7 +18,7 @@ const useAxiosSecure = () => {
         return res;
       },
       async (error) => {
-        toast.error(err?.message)
+        toast.error(error?.message)
         if (error.response.status === 401 || error.response.status === 403) {
           // logout
           logOut();
