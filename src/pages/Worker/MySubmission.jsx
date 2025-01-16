@@ -79,9 +79,9 @@ const MySubmission = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200 ">
-                  {mySubmissions.map((mySubmission) => (
+                  {mySubmissions.map((mySubmission,index) => (
                     <MySubmissionTableRow
-                      key={mySubmission._id}
+                      key={index}
                       mySubmission={mySubmission}
                     />
                   ))}

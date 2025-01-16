@@ -22,10 +22,11 @@ const ManageUsers = () => {
   } = useQuery({
     queryKey: ["users", user?.email],
     queryFn: async () => {
-      const { data } = await axiosSecure(`/all-users/${user?.email}`);
+      const data = await axiosSecure(`/all-users/${user?.email}`);
       return data;
     },
   });
+console.log(users);
 
   // Handle loading state
   if (isLoading) {
@@ -35,11 +36,6 @@ const ManageUsers = () => {
   // Handle error state
   if (isError) {
     return <div>Error: {error.message}</div>;
-  }
-
-  // Ensure users is an array before using .map
-  if (!Array.isArray(users)) {
-    return <div>No users data available</div>;
   }
 
   // Update role function
@@ -95,13 +91,13 @@ const ManageUsers = () => {
                 </tr>
               </thead>
               <tbody>
-                {users.map((userData) => (
+                {/* {users.map((userData) => (
                   <ManageUsersTableRow
                     key={userData?._id}
                     userData={userData}
                     openModal={openModal} // Pass function to open modal
                   />
-                ))}
+                ))} */}
               </tbody>
             </table>
           </div>

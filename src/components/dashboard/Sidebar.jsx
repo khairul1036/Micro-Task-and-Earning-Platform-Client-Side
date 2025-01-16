@@ -60,7 +60,7 @@ const Sidebar = () => {
           <div className="space-y-2 px-5 py-3">
             <Link
               to="/dashboard"
-              className={`block py-2 px-4 rounded flex items-center ${
+              className={`py-2 px-4 rounded flex items-center ${
                 isActive("/dashboard") ? "bg-gray-700" : "hover:bg-gray-600"
               }`}
             >
@@ -72,7 +72,7 @@ const Sidebar = () => {
               <>
                 <Link
                   to="/dashboard/tasklist"
-                  className={`block py-2 px-4 rounded flex items-center ${
+                  className={`py-2 px-4 rounded flex items-center ${
                     isActive("/dashboard/tasklist")
                       ? "bg-gray-700"
                       : "hover:bg-gray-600"
@@ -83,7 +83,7 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   to="/dashboard/my-submissions"
-                  className={`block py-2 px-4 rounded flex items-center ${
+                  className={`py-2 px-4 rounded flex items-center ${
                     isActive("/dashboard/my-submissions")
                       ? "bg-gray-700"
                       : "hover:bg-gray-600"
@@ -94,7 +94,7 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   to="/dashboard/withdrawals"
-                  className={`block py-2 px-4 rounded flex items-center ${
+                  className={`py-2 px-4 rounded flex items-center ${
                     isActive("/dashboard/withdrawals")
                       ? "bg-gray-700"
                       : "hover:bg-gray-600"
@@ -111,7 +111,7 @@ const Sidebar = () => {
               <>
                 <Link
                   to="/dashboard/add-new-task"
-                  className={`block py-2 px-4 rounded flex items-center ${
+                  className={`py-2 px-4 rounded flex items-center ${
                     isActive("/dashboard/add-new-task")
                       ? "bg-gray-700"
                       : "hover:bg-gray-600"
@@ -122,7 +122,7 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   to="/dashboard/my-task"
-                  className={`block py-2 px-4 rounded flex items-center ${
+                  className={`py-2 px-4 rounded flex items-center ${
                     isActive("/dashboard/my-task")
                       ? "bg-gray-700"
                       : "hover:bg-gray-600"
@@ -133,7 +133,7 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   to="/dashboard/purchase-coin"
-                  className={`block py-2 px-4 rounded flex items-center ${
+                  className={`py-2 px-4 rounded flex items-center ${
                     isActive("/dashboard/purchase-coin")
                       ? "bg-gray-700"
                       : "hover:bg-gray-600"
@@ -144,7 +144,7 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   to="/dashboard/payment-history"
-                  className={`block py-2 px-4 rounded flex items-center ${
+                  className={`py-2 px-4 rounded flex items-center ${
                     isActive("/dashboard/payment-history")
                       ? "bg-gray-700"
                       : "hover:bg-gray-600"
@@ -161,7 +161,7 @@ const Sidebar = () => {
               <>
                 <Link
                   to="/dashboard/manage-users"
-                  className={`block py-2 px-4 rounded flex items-center ${
+                  className={`py-2 px-4 rounded flex items-center ${
                     isActive("/dashboard/manage-users")
                       ? "bg-gray-700"
                       : "hover:bg-gray-600"
@@ -172,7 +172,7 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   to="/dashboard/manage-task"
-                  className={`block py-2 px-4 rounded flex items-center ${
+                  className={`py-2 px-4 rounded flex items-center ${
                     isActive("/dashboard/manage-task")
                       ? "bg-gray-700"
                       : "hover:bg-gray-600"
