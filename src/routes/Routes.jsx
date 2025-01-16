@@ -4,7 +4,6 @@ import Login from "../pages/Authentication/Login";
 import Register from "../pages/Authentication/Register";
 import Home from "../pages/langdingPages/Home";
 import DashboardLayout from "../layouts/DashboardLayout";
-import BuyerHome from "../pages/Buyer/BuyerHome";
 import AddTask from "../pages/Buyer/AddTask";
 import MyTasks from "../pages/Buyer/MyTasks";
 import UpdateMyTask from "../pages/Buyer/UpdateMyTask";
@@ -19,6 +18,7 @@ import BuyerRoute from "./BuyerRoute";
 import AdminRoute from "./AdminRoute";
 import ManageUsers from "../pages/Admin/ManageUsers";
 import ManageTasks from "../pages/Admin/ManageTasks";
+import HomeShowRoleBase from "../components/HomeShowRoleBase";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +40,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // buyer routes
   {
     path: "/dashboard",
     element: (
@@ -49,9 +48,10 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // buyer routes
       {
         index: true,
-        element: <BuyerHome />,
+        element: <HomeShowRoleBase/>,
       },
       {
         path: "/dashboard/add-new-task",

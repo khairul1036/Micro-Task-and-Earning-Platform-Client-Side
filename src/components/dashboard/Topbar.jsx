@@ -32,8 +32,8 @@ const Topbar = () => {
               alt="User"
               className="h-8 w-8 rounded-full"
             />
-            <span>{user?.displayName}</span>{" "}
-            {/* Replace with dynamic user name */}
+            <span>{user?.displayName}</span>
+            <span>{users?.role}</span>
           </div>
         </div>
       </div>

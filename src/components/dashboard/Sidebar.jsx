@@ -58,18 +58,18 @@ const Sidebar = () => {
         <div className="flex flex-col h-full">
           {/* Navigation Links */}
           <div className="space-y-2 px-5 py-3">
+            <Link
+              to="/dashboard"
+              className={`block py-2 px-4 rounded flex items-center ${
+                isActive("/dashboard") ? "bg-gray-700" : "hover:bg-gray-600"
+              }`}
+            >
+              <FaHome className="mr-3" />
+              Home
+            </Link>
             {/* worker */}
             {role === "Worker" && (
               <>
-                <Link
-                  to="/dashboard"
-                  className={`block py-2 px-4 rounded flex items-center ${
-                    isActive("/dashboard") ? "bg-gray-700" : "hover:bg-gray-600"
-                  }`}
-                >
-                  <FaHome className="mr-3" />
-                  Home
-                </Link>
                 <Link
                   to="/dashboard/tasklist"
                   className={`block py-2 px-4 rounded flex items-center ${
