@@ -9,7 +9,7 @@ const PurchaseCoin = () => {
     { name: "Basic Package", coins: 10, price: 1 },
     { name: "Standard Package", coins: 100, price: 10 },
     { name: "Premium Package", coins: 500, price: 50 },
-    { name: "Deluxe Package", coins: 2000, price: 100 },
+    { name: "Deluxe Package", coins: 1000, price: 100 },
   ];
 
   const openModal = (pkg) => {

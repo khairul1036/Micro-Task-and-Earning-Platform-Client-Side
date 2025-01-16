@@ -19,6 +19,7 @@ import AdminRoute from "./AdminRoute";
 import ManageUsers from "../pages/Admin/ManageUsers";
 import ManageTasks from "../pages/Admin/ManageTasks";
 import HomeShowRoleBase from "../components/HomeShowRoleBase";
+import WorkerRoute from "./WorkerRoute";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
       // buyer routes
       {
         index: true,
-        element: <HomeShowRoleBase/>,
+        element: <HomeShowRoleBase />,
       },
       {
         path: "/dashboard/add-new-task",
@@ -108,7 +109,9 @@ const router = createBrowserRouter([
         path: "/dashboard/tasklist",
         element: (
           <PrivateRoute>
-            <TaskList />
+            <WorkerRoute>
+              <TaskList />
+            </WorkerRoute>
           </PrivateRoute>
         ),
       },
@@ -116,7 +119,9 @@ const router = createBrowserRouter([
         path: "/dashboard/task-details/:id",
         element: (
           <PrivateRoute>
-            <TaskDetails />
+            <WorkerRoute>
+              <TaskDetails />
+            </WorkerRoute>
           </PrivateRoute>
         ),
       },
@@ -124,7 +129,9 @@ const router = createBrowserRouter([
         path: "/dashboard/my-submissions",
         element: (
           <PrivateRoute>
-            <MySubmission />
+            <WorkerRoute>
+              <MySubmission />
+            </WorkerRoute>
           </PrivateRoute>
         ),
       },
@@ -132,7 +139,9 @@ const router = createBrowserRouter([
         path: "/dashboard/withdrawals",
         element: (
           <PrivateRoute>
-            <WithDrawals />
+            <WorkerRoute>
+              <WithDrawals />
+            </WorkerRoute>
           </PrivateRoute>
         ),
       },
@@ -152,7 +161,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <ManageTasks/>
+              <ManageTasks />
             </AdminRoute>
           </PrivateRoute>
         ),

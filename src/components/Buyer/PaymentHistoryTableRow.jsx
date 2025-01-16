@@ -13,13 +13,13 @@ const PaymentHistoryTableRow = ({ payment }) => {
       </td>
 
       <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-        {price}
+        ${price}
       </td>
       <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
         {coins}
       </td>
       <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-        {format(new Date(date), "P")}
+        {date && format(new Date(date), "P")}
       </td>
     </tr>
   );

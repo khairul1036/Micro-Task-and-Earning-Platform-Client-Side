@@ -1,9 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { format } from 'date-fns'
+import { format } from "date-fns";
 
-const MyTasksTableRow = ({task,handleDelete}) => {
-    const {_id, task_title, task_detail, completion_date, required_workers, payable_amount} = task;
+const MyTasksTableRow = ({ task, handleDelete }) => {
+  const {
+    _id,
+    task_title,
+    task_detail,
+    completion_date,
+    required_workers,
+    payable_amount,
+  } = task;
   return (
     <tr>
       <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
@@ -11,19 +18,26 @@ const MyTasksTableRow = ({task,handleDelete}) => {
       </td>
 
       <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-      {format(new Date(completion_date), 'P')}
+        {completion_date && format(new Date(completion_date), "P")}
       </td>
 
-      <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">{required_workers}</td>
+      <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
+        {required_workers}
+      </td>
       <td className="px-4 py-4 text-sm whitespace-nowrap">
-        <div className="flex items-center text-gray-500 gap-x-2">${payable_amount}</div>
+        <div className="flex items-center text-gray-500 gap-x-2">
+          ${payable_amount}
+        </div>
       </td>
       <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-        {task_detail.substring(0,20)}....
+        {task_detail && task_detail.substring(0, 20)}....
       </td>
       <td className="px-4 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center gap-x-6">
-          <button onClick={()=> handleDelete(_id, required_workers, payable_amount)} className="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none">
+          <button
+            onClick={() => handleDelete(_id, required_workers, payable_amount)}
+            className="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
