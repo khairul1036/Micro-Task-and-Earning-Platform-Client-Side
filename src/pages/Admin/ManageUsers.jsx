@@ -6,6 +6,7 @@ import ManageUsersTableRow from "../../components/Admin/ManageUsersTableRow";
 import Loading from "../../components/Loading";
 import UpdateRoleModal from "../../components/Modal/UpdateRoleModal";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const ManageUsers = () => {
   const { user, loading } = useAuth();
@@ -27,7 +28,7 @@ const ManageUsers = () => {
       return data.data;
     },
   });
-  
+
   // Handle loading state
   if (isLoading) {
     return <Loading />;
@@ -46,6 +47,35 @@ const ManageUsers = () => {
       refetch(); // Refetch users after role update
     } catch (error) {
       console.error("Failed to update role", error);
+    }
+  };
+
+  // delete user form database
+  const userDelete = async (id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const {data} = await axiosSecure.delete(`/delete-user/${id}`);
+          if (data?.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your service has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        }
+      });
+    } catch (error) {
+      console.error("Failed to delete user", error);
     }
   };
 
@@ -85,7 +115,7 @@ const ManageUsers = () => {
                   <th className="px-5 py-3 bg-white border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-normal">
                     Coins
                   </th>
-                  <th className="px-5 py-3 bg-white border-b border-gray-200 text-gray-800 text-left text-sm uppercase font-normal">
+                  <th className="px-5 py-3 bg-white border-b border-gray-200 text-gray-800 text-center text-sm uppercase font-normal">
                     Action
                   </th>
                 </tr>
@@ -96,6 +126,7 @@ const ManageUsers = () => {
                     key={userData?._id}
                     userData={userData}
                     openModal={openModal} // Pass function to open modal
+                    userDelete={userDelete}
                   />
                 ))}
               </tbody>

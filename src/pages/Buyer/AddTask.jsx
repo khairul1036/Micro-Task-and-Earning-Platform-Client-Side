@@ -66,7 +66,6 @@ const AddTask = () => {
         navigate("/dashboard/my-task");
     } catch (err) {
       toast.error(err?.message);
-      console.log(err);
     }
   };
 

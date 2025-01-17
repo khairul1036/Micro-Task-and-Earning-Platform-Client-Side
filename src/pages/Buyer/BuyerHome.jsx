@@ -12,7 +12,7 @@ const BuyerHome = () => {
   const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSubmission, setSelectedSubmission] = useState(null);
-  
+
   const { data, refetch } = useQuery({
     queryKey: ["data", user?.email],
     queryFn: async () => {
@@ -22,21 +22,21 @@ const BuyerHome = () => {
   });
 
   const handleApproved = async (id) => {
-    try{
-      await axiosSecure.patch(`/update-status/buyer/${id}`)
-      refetch()
-      toast.success("Submission approved!!")
-    }catch(err){
-      console.log(err);
+    try {
+      await axiosSecure.patch(`/update-status/buyer/${id}`);
+      refetch();
+      toast.success("Submission approved!!");
+    } catch (err) {
+      toast.error(err?.message);
     }
   };
   const handleReject = async (id) => {
-    try{
-      await axiosSecure.patch(`/update-status/buyer/${id}?reject=true`)
-      refetch()
-      toast.success("Submission reject!!")
-    }catch(err){
-      console.log(err);
+    try {
+      await axiosSecure.patch(`/update-status/buyer/${id}?reject=true`);
+      refetch();
+      toast.success("Submission reject!!");
+    } catch (err) {
+      toast.error(err?.message);
     }
   };
 
@@ -139,13 +139,17 @@ const BuyerHome = () => {
                         <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
                           <div className="flex items-center gap-5">
                             <button
-                              onClick={() => handleApproved(pendingSubmission?._id)}
+                              onClick={() =>
+                                handleApproved(pendingSubmission?._id)
+                              }
                               className="text-gray-500 transition-colors duration-200 hover:text-green-500 focus:outline-none"
                             >
                               <FaCheck className="text-2xl" />
                             </button>
                             <button
-                              onClick={() => handleReject(pendingSubmission?._id)}
+                              onClick={() =>
+                                handleReject(pendingSubmission?._id)
+                              }
                               className="text-gray-500 transition-colors duration-200 hover:text-red-500 focus:outline-none"
                             >
                               <MdDoNotDisturbAlt className="text-2xl" />

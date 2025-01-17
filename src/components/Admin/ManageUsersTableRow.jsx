@@ -1,6 +1,6 @@
 import React from "react";
 
-const ManageUsersTableRow = ({ userData, openModal }) => {
+const ManageUsersTableRow = ({ userData, openModal, userDelete }) => {
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -24,12 +24,20 @@ const ManageUsersTableRow = ({ userData, openModal }) => {
         {userData.coins}
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <button
-          onClick={() => openModal(userData)}
-          className="text-teal-500 hover:text-teal-700 font-semibold"
-        >
-          Update Role
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => openModal(userData)}
+            className="text-teal-500 hover:text-teal-700 font-semibold"
+          >
+            Update Role
+          </button>
+          <button
+            onClick={() => userDelete(userData._id)}
+            className="text-red-500 hover:text-red-700 font-semibold"
+          >
+            Remove
+          </button>
+        </div>
       </td>
     </tr>
   );

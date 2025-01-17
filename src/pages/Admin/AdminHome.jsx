@@ -17,7 +17,7 @@ const AdminHome = () => {
       refetch();
       toast.success("Withdraw payment success!!");
     } catch (err) {
-      console.log(err);
+      toast.error("Withdraw payment unsuccess!!");
     }
   };
   return (

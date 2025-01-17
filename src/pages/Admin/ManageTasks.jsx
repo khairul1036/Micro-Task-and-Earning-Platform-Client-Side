@@ -16,7 +16,6 @@ const ManageTasks = () => {
   });
 
   const handleDelete = async (id) => {
-
     try {
       Swal.fire({
         title: "Are you sure?",
@@ -41,7 +40,6 @@ const ManageTasks = () => {
         }
       });
     } catch (error) {
-        console.log(error);
       toast.error(error?.response?.data);
     }
   };

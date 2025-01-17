@@ -20,7 +20,6 @@ const Registration = () => {
   const handleSignUp = async (data) => {
     const { name, email, photo, password, role } = data;
     const photoURL = await imageUpload(photo[0]);
-    // console.log(photoURL);
     try {
       const result = await createUser(email, password);
       await updateUserProfile(name, photoURL);
@@ -34,7 +33,6 @@ const Registration = () => {
       navigate("/");
     } catch (err) {
       toast.error(err?.message);
-      console.log(err);
     }
   };
 
@@ -46,7 +44,6 @@ const Registration = () => {
       navigate("/");
     } catch (err) {
       toast.error(err?.message);
-      console.log(err);
     }
   };
 

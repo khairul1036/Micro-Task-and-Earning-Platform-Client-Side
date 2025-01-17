@@ -9,7 +9,7 @@ const WithDrawals = () => {
   const axiosSecure = useAxiosSecure();
   const [coinsToWithdraw, setCoinsToWithdraw] = useState(0);
   const [paymentSystem, setPaymentSystem] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // Calculate the withdrawal amount in dollars
   const withdrawAmount = coinsToWithdraw / 20;
@@ -32,10 +32,9 @@ const WithDrawals = () => {
     try {
       const { data } = await axiosSecure.post("/withdraw", formData);
       toast.success("Withdraw requested success!!");
-      navigate('/dashboard')
+      navigate("/dashboard");
     } catch (err) {
-      console.log(err);
-      toast.error(err);
+      toast.error(err?.message);
     }
   };
 

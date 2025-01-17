@@ -49,10 +49,8 @@ const CheckoutForm = ({ closeModal, selectedPackage }) => {
     });
 
     if (error) {
-      // console.log("[error]", error);
       setErr(error.message);
     } else {
-      // console.log("[PaymentMethod]", paymentMethod);
       setErr("");
     }
 
@@ -68,10 +66,8 @@ const CheckoutForm = ({ closeModal, selectedPackage }) => {
         },
       });
     if (confirmError) {
-      // console.log("confirm error---------->", confirmError);
       setErr(confirmError);
     } else {
-      // console.log("paymentIntent------>", paymentIntent);
       setErr("");
       if (paymentIntent.status === "succeeded") {
         // save the payment info in the database
@@ -84,7 +80,6 @@ const CheckoutForm = ({ closeModal, selectedPackage }) => {
           coins,
         };
         const res = await axiosSecure.post("/payments", payment);
-        // console.log("payment save---->", res);
         toast.success("Payment Success!!");
         navigate("/dashboard/payment-history");
       }

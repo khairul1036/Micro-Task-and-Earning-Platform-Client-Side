@@ -51,15 +51,12 @@ const TaskDetails = () => {
       submitAt: new Date(),
     };
 
-    console.log(submissionData);
-
     try {
       const data = await axiosSecure.post("/add-submission", submissionData);
       toast.success("Task added successfully");
       navigate("/dashboard/my-submissions");
     } catch (err) {
       toast.error(err?.message);
-      console.log(err);
     }
   };
 
