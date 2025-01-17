@@ -1,13 +1,27 @@
-import React from "react";
 import { FaCoins } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import FetchData from "../../hooks/FetchData";
+import Notification from "./Notification";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+
 const Topbar = () => {
   const { user } = useAuth();
   const { users, userRefetch } = FetchData();
-  userRefetch()
-  // console.log(users);
+  userRefetch();
+
+  const axiosSecure = useAxiosSecure();
+
+  const { data: notifications = [], refetch } = useQuery({
+    queryKey: ["notification", user?.email],
+    queryFn: async () => {
+      const { data } = await axiosSecure(`/notification/${user?.email}`);
+      return data;
+    },
+  });
+  refetch(); // refetch the notifications
+
   return (
     <div className="w-full py-1 bg-deepTeal text-white">
       <div className="md:mx-16 flex justify-between items-center p-4">
@@ -33,8 +47,13 @@ const Topbar = () => {
               alt="User"
               className="h-8 w-8 rounded-full"
             />
-            <span>{user?.displayName}</span>
-            <span>{users?.role}</span>
+            <div className="flex flex-col">
+              <span>{user?.displayName}</span>
+              <span className="text-xs">{users?.role}</span>
+            </div>
+          </div>
+          <div>
+            <Notification notifications={notifications} />
           </div>
         </div>
       </div>

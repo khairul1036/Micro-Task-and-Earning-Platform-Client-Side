@@ -30,7 +30,7 @@ const WorkerHome = () => {
         </div>
         <div className="bg-purple-500 shadow-md rounded-lg p-4">
           <h3 className="">Total Earning</h3>
-          <h2 className="text-2xl font-bold">$ {data?.totalEarnings}</h2>
+          <h2 className="text-2xl font-bold">{data?.totalEarnings}</h2>
         </div>
       </div>
       {/* show data in table format */}
@@ -91,7 +91,7 @@ const WorkerHome = () => {
                           </td>
 
                           <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                            $ {approvedSubmission?.payable_amount}
+                            {approvedSubmission?.payable_amount}
                           </td>
                           <td className="px-4 py-4 text-sm whitespace-nowrap">
                             <div className="flex items-center gap-x-2">

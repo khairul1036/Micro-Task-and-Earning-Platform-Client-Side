@@ -3,9 +3,9 @@ import React from "react";
 const ManageUsersTableRow = ({ userData, openModal }) => {
   return (
     <tr>
-      {" "}
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <img
+          referrerPolicy="no-referrer"
           src={userData.image}
           alt="image"
           className="h-10 w-10 rounded-full"

@@ -8,7 +8,7 @@ import UpdateRoleModal from "../../components/Modal/UpdateRoleModal";
 import toast from "react-hot-toast";
 
 const ManageUsers = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [selectedUser, setSelectedUser] = useState(null); // Store the user to update
   const [isModalOpen, setIsModalOpen] = useState(false); // Manage modal visibility
@@ -20,14 +20,14 @@ const ManageUsers = () => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ["users", user?.email],
+    queryKey: ["users"],
+    enabled: !loading,
     queryFn: async () => {
-      const data = await axiosSecure(`/all-users/${user?.email}`);
-      return data;
+      const data = await axiosSecure(`/all/users/${user?.email}`);
+      return data.data;
     },
   });
-console.log(users);
-
+  
   // Handle loading state
   if (isLoading) {
     return <Loading />;
@@ -91,13 +91,13 @@ console.log(users);
                 </tr>
               </thead>
               <tbody>
-                {/* {users.map((userData) => (
+                {users?.map((userData) => (
                   <ManageUsersTableRow
                     key={userData?._id}
                     userData={userData}
                     openModal={openModal} // Pass function to open modal
                   />
-                ))} */}
+                ))}
               </tbody>
             </table>
           </div>

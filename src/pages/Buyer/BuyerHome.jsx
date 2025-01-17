@@ -12,6 +12,7 @@ const BuyerHome = () => {
   const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSubmission, setSelectedSubmission] = useState(null);
+  
   const { data, refetch } = useQuery({
     queryKey: ["data", user?.email],
     queryFn: async () => {
@@ -65,7 +66,7 @@ const BuyerHome = () => {
         </div>
         <div className="bg-purple-500 shadow-md rounded-lg p-4">
           <h3>Total Payment</h3>
-          <h2 className="text-2xl font-bold">$ {data?.totalPayment}</h2>
+          <h2 className="text-2xl font-bold">{data?.totalPayment}</h2>
         </div>
       </div>
 
