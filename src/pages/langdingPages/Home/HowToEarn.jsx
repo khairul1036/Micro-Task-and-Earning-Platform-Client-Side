@@ -4,7 +4,7 @@ import SectionTitle from "../Share/SectionTitle";
 const HowToEarn = () => {
   return (
     <>
-      <div className="bg-teal-50 pb-16">
+      <div className="bg-gray-100 pb-16">
         <div className="max-w-screen-2xl mx-auto">
           <SectionTitle
             subTitle={"Earnings"}
