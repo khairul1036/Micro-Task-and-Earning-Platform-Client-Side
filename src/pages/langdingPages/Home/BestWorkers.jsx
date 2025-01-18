@@ -22,7 +22,7 @@ const BestWorkers = () => {
       <SectionTitle
         title={"Top 6 Earning Workers"}
         subTitle={
-          "Check out the top 6 workers with the highest coins earned. Get inspired and start earning today!"
+          "Top Workers"
         }
       />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 px-5 pt-5 lg:pt-10">

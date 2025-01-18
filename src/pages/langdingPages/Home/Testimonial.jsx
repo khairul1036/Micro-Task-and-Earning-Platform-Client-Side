@@ -16,7 +16,7 @@ const Testimonial = () => {
       <SectionTitle
         title={"What Our Users Are Saying"}
         subTitle={
-          "Real stories from workers and buyers who have experienced the benefits of our platform"
+          "Testimonial"
         }
       />
 
@@ -54,6 +54,7 @@ const Testimonial = () => {
               text={
                 "This platform has truly helped me maximize my free time. I’ve been able to earn money by completing tasks that are both interesting and easy. I appreciate how quickly I can complete tasks and receive payment. It’s been a great way to supplement my income!"
               }
+              hide={"hidden"}
             />
           </div>
         </SwiperSlide>
@@ -74,6 +75,7 @@ const Testimonial = () => {
               text={
                 "Being a buyer on this platform has been a game-changer for me. I can create tasks in just a few steps, and there are always skilled workers ready to take on the job. The results are delivered on time and of great quality. It’s become my go-to platform for outsourcing tasks."
               }
+              hide={"hidden"}
             />
           </div>
         </SwiperSlide>
@@ -96,6 +98,7 @@ const Testimonial = () => {
               text={
                 "his platform has exceeded my expectations. As a worker, I’ve been able to complete various tasks and get paid promptly. The task options are diverse, and I never get bored. Plus, the user interface is simple, making it easy to navigate. I highly recommend it to anyone looking to earn extra income."
               }
+              hide={"hidden"}
             />
           </div>
         </SwiperSlide>
