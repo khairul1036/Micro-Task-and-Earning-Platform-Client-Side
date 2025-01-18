@@ -5,6 +5,7 @@ import {
   FaPen,
   FaPaintBrush,
 } from "react-icons/fa"; // Importing icons from react-icons
+import SectionTitle from "../Share/SectionTitle";
 
 const EarningOpportunities = () => {
   // Categories data
@@ -36,54 +37,36 @@ const EarningOpportunities = () => {
   ];
 
   return (
-    <section className="max-w-screen-xl mx-auto p-6">
-      {/* Main heading */}
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-semibold text-gray-800">
-          Explore Earning Opportunities
-        </h2>
-        <p className="text-gray-600 mt-2">
-          Discover a wide range of tasks to suit your skills and interests. From
-          data entry to creative design, there's something for everyone!
-        </p>
-      </div>
+    <section>
+      <SectionTitle
+        subTitle={"Opportunities"}
+        title={"Explore Earning Opportunities"}
+      />
 
-      {/* Flex container for left content and right image */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Flex container for left content */}
+      <div
+        className="bg-cover bg-center bg-fixed my-10"
+        style={{
+          backgroundImage:
+            'url("https://www.shutterstock.com/image-photo/business-performance-checklist-businessman-conducting-600nw-2343237329.jpg")',
+        }}
+      >
         {/* Left side: Categories and content */}
-        <div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-2 gap-6">
+        <div className="bg-gray-800 bg-opacity-80">
+          <div className="max-w-screen-2xl mx-auto grid sm:grid-cols-2 md:grid-cols-2 gap-6 px-5 py-10">
             {categories.map((category, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-md shadow-lg cursor-pointer"
+                className="p-6 rounded-md cursor-pointer hover:text-white text-gray-800 bg-white hover:bg-deepTeal transition duration-300 transform hover:scale-105"
               >
-                <div className="flex items-center justify-center bg-blue-100 p-4 rounded-full mb-4">
+                <span className="flex w-12 bg-teal-600 text-white p-4 rounded-full mb-4">
                   {category.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-gray-800">
-                  {category.title}
-                </h3>
-                <p className="text-gray-600 mt-2">{category.description}</p>
+                </span>
+                <h3 className="text-xl font-semibold">{category.title}</h3>
+                <p className="mt-2">{category.description}</p>
               </div>
             ))}
           </div>
-
-          {/* Call to action */}
-          <div className="text-center mt-12">
-            <button className="py-3 px-8 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all">
-              Browse Tasks
-            </button>
-          </div>
-        </div>
-
-        {/* Right side: Image */}
-        <div className="flex items-center justify-center">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKCiI3b-SinXJ4fLxKgmKK3UkzGqzKA6yEiQ&s" // Replace with your image source
-            alt="Earning Opportunities"
-            className="w-full max-w-md rounded-md shadow-lg"
-          />
         </div>
       </div>
     </section>

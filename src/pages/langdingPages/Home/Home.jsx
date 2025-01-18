@@ -14,10 +14,13 @@ const Home = () => {
       </div>
       <div className="max-w-screen-2xl mx-auto">
         <BestWorkers />
-        <Testimonial />
-        <EarningOpportunities />
       </div>
       <HowToEarn />
+      <div className="max-w-screen-2xl mx-auto">
+        <Testimonial />
+      </div>
+
+      <EarningOpportunities />
     </>
   );
 };

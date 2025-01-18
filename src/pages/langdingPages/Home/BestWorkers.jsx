@@ -1,9 +1,9 @@
 import React from "react";
 import SectionTitle from "../Share/SectionTitle";
-import { RiCoinsLine } from "react-icons/ri";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "../../../components/Loading";
+import { FaCoins } from "react-icons/fa";
 
 const BestWorkers = () => {
   const { data, isLoading } = useQuery({
@@ -25,7 +25,7 @@ const BestWorkers = () => {
           "Top Workers"
         }
       />
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 px-5 pt-5 lg:pt-10">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 px-5 py-5 lg:pt-10 ">
         {data.map((worker) => (
           <>
             <div key={worker._id} className="flex items-center gap-2">
@@ -36,7 +36,7 @@ const BestWorkers = () => {
               />
               <div>
                 <h2 className="flex items-center gap-1 text-lg md:text-3xl text-gray-600 font-semibold">
-                  <RiCoinsLine />
+                  <FaCoins className="text-xl mr-1"/>
                   {worker.coins}
                 </h2>
                 <p className="text-xs text-gray-500">{worker.name}</p>
