@@ -1,5 +1,7 @@
 import React from "react";
 import HeroSection from "./HeroSection";
+import BestWorkers from "./BestWorkers";
+import Testimonial from "./Testimonial";
 
 const Home = () => {
   return (
@@ -9,7 +11,8 @@ const Home = () => {
         <HeroSection />
       </div>
       <div className="max-w-screen-2xl mx-auto">
-        xcfc
+        <BestWorkers />
+        <Testimonial/>
       </div>
     </>
   );

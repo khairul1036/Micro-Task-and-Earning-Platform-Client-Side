@@ -14,7 +14,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center py-3 border-b dark:border-gray-600">
+    <div className="px-5 flex flex-col md:flex-row justify-between items-center py-3 border-b dark:border-gray-600">
       <div>
         <Link className="text-2xl text-gray-900 dark:text-white font-bold">
           Task<span className="text-teal-600">Earn</span>
