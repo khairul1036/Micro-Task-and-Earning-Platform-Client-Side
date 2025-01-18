@@ -1,12 +1,14 @@
-import { FaCoins } from "react-icons/fa";
+import { FaBars, FaCoins, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import FetchData from "../../hooks/FetchData";
 import Notification from "./Notification";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 const Topbar = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { user } = useAuth();
   const { users, userRefetch } = FetchData();
   userRefetch();
@@ -22,17 +24,15 @@ const Topbar = () => {
   });
   refetch(); // refetch the notifications
 
+  // Function to toggle sidebar visibility on mobile
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div className="w-full py-1 bg-deepTeal text-white">
-      <div className="md:mx-16 flex justify-between items-center p-4">
-        {/* Left Side: Logo */}
-        <div className="flex items-center">
-          <Link to={"/"} className="text-2xl text-white font-bold">
-            TaskEarn
-          </Link>
-        </div>
-
-        {/* Right Side: Coins, Image, and Name */}
+      <div className="md:mx-16 flex justify-end items-center p-4">
+               {/* Right Side: Coins, Image, and Name */}
         <div className="flex items-center space-x-4">
           {/* Coin Icon and Text */}
           <div className="flex items-center space-x-1">
@@ -44,6 +44,7 @@ const Topbar = () => {
           <div className="flex items-center space-x-2">
             <img
               src={user?.photoURL}
+              referrerPolicy="no-referrer"
               alt="User"
               className="h-8 w-8 rounded-full"
             />

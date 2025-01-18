@@ -38,7 +38,7 @@ const Sidebar = () => {
   return (
     <div className="flex md:h-screen">
       {/* Mobile Hamburger Menu Button */}
-      <div className="md:hidden flex items-center p-4 bg-gray-800 text-white">
+      <div className="">
         <button onClick={toggleSidebar}>
           {isSidebarOpen ? (
             <FaTimes className="h-6 w-6" />
@@ -56,6 +56,11 @@ const Sidebar = () => {
       >
         {/* Sidebar Content */}
         <div className="flex flex-col h-full">
+          <div className="text-center">
+            <Link to={"/"} className="text-2xl text-white font-bold">
+              TaskEarn
+            </Link>
+          </div>
           {/* Navigation Links */}
           <div className="space-y-2 px-5 py-3">
             <Link

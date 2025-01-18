@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layouts/Main";
 import Login from "../pages/Authentication/Login";
 import Register from "../pages/Authentication/Register";
-import Home from "../pages/langdingPages/Home";
+import Home from "../pages/langdingPages/Home/Home";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AddTask from "../pages/Buyer/AddTask";
 import MyTasks from "../pages/Buyer/MyTasks";
