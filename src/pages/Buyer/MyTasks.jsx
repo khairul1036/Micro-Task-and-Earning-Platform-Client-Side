@@ -36,8 +36,8 @@ const MyTasks = () => {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const { data } = await axiosSecure.post(`/delete-task/${id}`);
-          await axiosSecure.patch(`/user/${user?.email}?delete=true`, {
+          const { data } = await axiosSecure.delete(`/delete-task/${id}`);
+          await axiosSecure.patch(`/user/update/${user?.email}?delete=true`, {
             calculate_amount,
           });
           if (data?.deletedCount > 0) {
@@ -73,7 +73,7 @@ const MyTasks = () => {
       <div className="flex flex-col mt-6">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-            <div className="overflow-hidden border border-gray-200  md:rounded-lg">
+            <div className="overflow-hidden border border-gray-200 mx-5 mb-5 md:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>

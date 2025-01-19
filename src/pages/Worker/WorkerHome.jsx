@@ -82,7 +82,7 @@ const WorkerHome = () => {
                       </th>
                     </tr>
                   </thead>
-                  {data?.approvedSubmissions.length === 0 ? (
+                  {data?.approvedSubmissions?.length === 0 ? (
                     <p
                       className="text-xl py-5 text-center text-gray-600
                     "

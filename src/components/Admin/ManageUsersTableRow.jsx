@@ -1,5 +1,3 @@
-import React from "react";
-
 const ManageUsersTableRow = ({ userData, openModal, userDelete }) => {
   return (
     <tr>

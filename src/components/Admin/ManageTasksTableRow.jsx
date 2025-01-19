@@ -25,7 +25,7 @@ const ManageTasksTableRow = ({ task, handleDelete }) => {
       </td>
       <td className="px-4 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center text-gray-500 gap-x-2">
-          ${payable_amount}
+          {payable_amount}
         </div>
       </td>
       <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">

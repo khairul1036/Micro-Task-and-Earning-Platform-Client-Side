@@ -1,18 +1,22 @@
 import useAuth from "../hooks/useAuth";
 import { Link, NavLink } from "react-router-dom";
-import FetchData from "../hooks/FetchData";
 import { IoIosLogOut } from "react-icons/io";
 import { FaCoins } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Navbar = () => {
-  const { user, logOut } = useAuth();
-  let coins = 0;
+  const { user, loading, logOut } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
-  if (user !== null) {
-    const { users, userRefetch } = FetchData();
-    coins = users?.coins;
-    userRefetch();
-  }
+  const { data } = useQuery({
+    queryKey: ["data", user?.email],
+    enabled: !loading && !!user?.email,
+    queryFn: async () => {
+      const { data } = await axiosSecure(`/user/${user?.email}`);
+      return data;
+    },
+  });
 
   const links = (
     <>
@@ -116,7 +120,7 @@ const Navbar = () => {
           <>
             <div className="flex items-center gap-5 px-5">
               <span className="flex items-center gap-1 text-deepTeal font-bold bg-gray-100 py-1 px-2 rounded-lg">
-                <FaCoins /> {coins}
+                <FaCoins /> {data?.coins}
               </span>
               <img
                 referrerPolicy="no-referrer"

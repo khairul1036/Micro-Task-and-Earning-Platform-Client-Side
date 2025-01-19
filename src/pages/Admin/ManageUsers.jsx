@@ -95,14 +95,14 @@ const ManageUsers = () => {
     <div>
       <div className="py-8">
         <div className="flex items-center gap-x-3">
-          <h2 className="text-lg font-medium text-gray-800 ">Total Users</h2>
+          <h2 className="text-lg font-medium text-gray-800 mx-5">Total Users</h2>
 
           <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">
             {users?.length} User
           </span>
         </div>
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-          <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+          <div className="inline-block min-w-full shadow mx-5 rounded-lg overflow-hidden">
             <table className="min-w-full leading-normal">
               <thead>
                 <tr>

@@ -11,7 +11,7 @@ const Login = () => {
   const location = useLocation();
   const from = location?.state || "/";
 
-  const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const { signIn, signInWithGoogle, loading, setLoading } = useContext(AuthContext);
 
   // Google Signin
   const handleGoogleSignIn = async () => {
@@ -19,7 +19,7 @@ const Login = () => {
       const data = await signInWithGoogle();
       await saveUser(data?.user);
       toast.success("Signin Successful");
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (err) {
       toast.error(err?.message);
     }
@@ -57,8 +57,9 @@ const Login = () => {
       //User Login
       await signIn(email, pass);
       toast.success("Signin Successful");
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (err) {
+      setLoading(false)
       toast.error("Invalid credential");
     }
   };
@@ -166,7 +167,13 @@ const Login = () => {
                 type="submit"
                 className="w-full px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-deepTeal bg-deepTeal transition-all ease-in-out duration-300 hover:bg-transparent hover:text-deepTeal"
               >
-                Sign In
+                {loading ? (
+                  <div className="flex justify-center items-center">
+                    <span className="loading loading-spinner text-success"></span>
+                  </div>
+                ) : (
+                  "Sign In"
+                )}
               </button>
             </div>
           </form>

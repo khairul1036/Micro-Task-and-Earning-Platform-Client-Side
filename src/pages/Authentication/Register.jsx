@@ -9,7 +9,7 @@ import HelmetTitle from "../langdingPages/Share/HelmetTitle";
 
 const Registration = () => {
   const navigate = useNavigate();
-  const { signInWithGoogle, createUser, updateUserProfile } =
+  const { signInWithGoogle, createUser, updateUserProfile, loading, setLoading } =
     useContext(AuthContext);
 
   const {
@@ -44,6 +44,7 @@ const Registration = () => {
       toast.success("Signin Successful");
       navigate("/dashboard");
     } catch (err) {
+      setLoading(false)
       toast.error(err?.message);
     }
   };
@@ -229,7 +230,13 @@ const Registration = () => {
                 type="submit"
                 className="w-full px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-deepTeal bg-deepTeal transition-all ease-in-out duration-300 hover:bg-transparent hover:text-deepTeal"
               >
-                Sign Up
+                {loading ? (
+                  <div className="flex justify-center items-center">
+                    <span className="loading loading-spinner text-success"></span>
+                  </div>
+                ) : (
+                  "Sign Up"
+                )}
               </button>
             </div>
           </form>

@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 const Topbar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const { user } = useAuth();
   const { users, userRefetch } = FetchData();
   userRefetch();
@@ -32,6 +32,16 @@ const Topbar = () => {
   return (
     <div className="w-full py-1 bg-deepTeal text-white">
       <div className="md:mx-16 flex justify-end items-center p-4">
+              {/* Mobile Hamburger Menu Button */}
+      <div className="">
+        <button onClick={toggleSidebar}>
+          {isSidebarOpen ? (
+            <FaTimes className="h-6 w-6" />
+          ) : (
+            <FaBars className="h-6 w-6" />
+          )}
+        </button>
+      </div>
                {/* Right Side: Coins, Image, and Name */}
         <div className="flex items-center space-x-4">
           {/* Coin Icon and Text */}

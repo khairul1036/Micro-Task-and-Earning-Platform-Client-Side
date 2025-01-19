@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddTask = () => {
   const [startDate, setStartDate] = useState(new Date());
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const { users } = FetchData();
@@ -42,6 +43,7 @@ const AddTask = () => {
       return;
     }
 
+    setIsSubmitting(true);
     const photoURL = await imageUpload(task_image_url[0]);
     const formData = {
       task_title,
@@ -60,17 +62,21 @@ const AddTask = () => {
     };
     try {
       const data = await axiosSecure.post("/add-task", formData);
-      await axiosSecure.patch(`/user/${user?.email}`, { calculate_amount });
+      await axiosSecure.patch(`/user/update/${user?.email}`, {
+        calculate_amount,
+      });
       reset();
       toast.success("Task added successfully");
-        navigate("/dashboard/my-task");
+      navigate("/dashboard/my-task");
+      setIsSubmitting(false);
     } catch (err) {
+      setIsSubmitting(false);
       toast.error(err?.message);
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-4 bg-white rounded shadow-lg">
+    <div className="max-w-3xl mx-auto p-4 bg-white rounded shadow-lg my-5">
       <h2 className="text-2xl font-bold mb-4">Add New Task</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Task Title */}
@@ -103,64 +109,88 @@ const AddTask = () => {
           )}
         </div>
 
-        {/* Required Workers */}
-        <div>
-          <label className="block text-sm font-medium mb-1">
-            Required Workers
-          </label>
-          <input
-            type="number"
-            {...register("required_workers", {
-              required: "Number of workers is required",
-              min: 1,
-            })}
-            className="w-full p-2 border rounded bg-gray-100"
-            placeholder="Ex: 100"
-          />
-          {errors.required_workers && (
-            <p className="text-red-500 text-sm">
-              {errors.required_workers.message}
-            </p>
-          )}
+        <div className="md:flex justify-between items-center gap-5">
+          {/* Required Workers */}
+          <div className="w-full">
+            <label className="block text-sm font-medium mb-1">
+              Required Workers
+            </label>
+            <input
+              type="number"
+              {...register("required_workers", {
+                required: "Number of workers is required",
+                min: 1,
+              })}
+              className="w-full p-2 border rounded bg-gray-100"
+              placeholder="Ex: 100"
+            />
+            {errors.required_workers && (
+              <p className="text-red-500 text-sm">
+                {errors.required_workers.message}
+              </p>
+            )}
+          </div>
+
+          {/* Payable Amount */}
+          <div className="w-full">
+            <label className="block text-sm font-medium mb-1">
+              Payable Amount
+            </label>
+            <input
+              type="number"
+              {...register("payable_amount", {
+                required: "Payable amount is required",
+                min: 1,
+              })}
+              className="w-full p-2 border rounded bg-gray-100"
+              placeholder="Ex: 10"
+            />
+            {errors.payable_amount && (
+              <p className="text-red-500 text-sm">
+                {errors.payable_amount.message}
+              </p>
+            )}
+          </div>
         </div>
 
-        {/* Payable Amount */}
-        <div>
-          <label className="block text-sm font-medium mb-1">
-            Payable Amount
-          </label>
-          <input
-            type="number"
-            {...register("payable_amount", {
-              required: "Payable amount is required",
-              min: 1,
-            })}
-            className="w-full p-2 border rounded bg-gray-100"
-            placeholder="Ex: 10"
-          />
-          {errors.payable_amount && (
-            <p className="text-red-500 text-sm">
-              {errors.payable_amount.message}
-            </p>
-          )}
-        </div>
+        <div className="md:flex justify-between items-center">
+          {/* Completion Date */}
+          <div className="w-full">
+            <label className="block text-sm font-medium mb-1">
+              Completion Date
+            </label>
+            {/* Date Picker Input Field */}
+            <div className="z-0">
+              <DatePicker
+                className="w-full border p-2 rounded-md bg-white text-gray-800"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+            </div>
+            {errors.completion_date && (
+              <p className="text-red-500 text-sm">
+                {errors.completion_date.message}
+              </p>
+            )}
+          </div>
 
-        {/* Completion Date */}
-        <div>
-          <label className="block text-sm font-medium mb-1">
-            Completion Date
-          </label>
-          {/* Date Picker Input Field */}
-          <DatePicker
-            className="border p-2 rounded-md bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-100"
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-          />
-          {errors.completion_date && (
-            <p className="text-red-500 text-sm">
-              {errors.completion_date.message}
-            </p>
-          )}
+          {/* Task Image URL */}
+          <div className="w-full">
+            <label className="block text-sm font-medium mb-1">Task Image</label>
+            <input
+              type="file"
+              accept=".png,.jpg,.jpeg"
+              {...register("task_image_url", {
+                required: "Task image is required",
+              })}
+              className="w-full p-2 border rounded"
+            />
+            {errors.task_image_url && (
+              <p className="text-red-500 text-sm">
+                {errors.task_image_url.message}
+              </p>
+            )}
+          </div>
         </div>
 
         {/* Submission Info */}
@@ -173,7 +203,7 @@ const AddTask = () => {
               required: "Submission info is required",
             })}
             className="w-full p-2 border rounded bg-gray-100"
-            rows="2"
+            rows="3"
             placeholder="What to submit, like screenshot or proof"
           ></textarea>
           {errors.submission_info && (
@@ -183,30 +213,23 @@ const AddTask = () => {
           )}
         </div>
 
-        {/* Task Image URL */}
-        <div>
-          <label className="block text-sm font-medium mb-1">Task Image</label>
-          <input
-            type="file"
-            accept=".png,.jpg,.jpeg"
-            {...register("task_image_url", {
-              required: "Task image is required",
-            })}
-            className="w-full p-2 border rounded"
-          />
-          {errors.task_image_url && (
-            <p className="text-red-500 text-sm">
-              {errors.task_image_url.message}
-            </p>
-          )}
-        </div>
-
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+          disabled={isSubmitting}
+          className={`w-full px-4 py-2 text-sm rounded-full font-bold border-2  border-deepTeal  ${
+            isSubmitting
+              ? "cursor-not-allowed"
+              : "text-deepTeal bg-transparent transition-all ease-in-out duration-300  hover:bg-deepTeal hover:text-white"
+          }`}
         >
-          Submit Task
+          {isSubmitting ? (
+            <div className="flex justify-center items-center">
+              <span className="loading loading-spinner text-success"></span>
+            </div>
+          ) : (
+            "Submit"
+          )}
         </button>
       </form>
     </div>

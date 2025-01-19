@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ closeModal, selectedPackage }) => {
   const [clientSecret, setClientSecret] = useState();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
@@ -26,7 +27,6 @@ const CheckoutForm = ({ closeModal, selectedPackage }) => {
   const handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
-
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
       // form submission until Stripe.js has loaded.
@@ -41,7 +41,7 @@ const CheckoutForm = ({ closeModal, selectedPackage }) => {
     if (card == null) {
       return;
     }
-
+    setIsSubmitting(true);
     // Use your card Element with other Stripe.js APIs
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -66,6 +66,7 @@ const CheckoutForm = ({ closeModal, selectedPackage }) => {
         },
       });
     if (confirmError) {
+      setIsSubmitting(false);
       setErr(confirmError);
     } else {
       setErr("");
@@ -82,6 +83,7 @@ const CheckoutForm = ({ closeModal, selectedPackage }) => {
         const res = await axiosSecure.post("/payments", payment);
         toast.success("Payment Success!!");
         navigate("/dashboard/payment-history");
+        setIsSubmitting(false);
       }
     }
   };
@@ -108,16 +110,26 @@ const CheckoutForm = ({ closeModal, selectedPackage }) => {
       <div className="mt-6 flex justify-between">
         <button
           onClick={closeModal}
-          className="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-600"
+          className="px-4 py-2 rounded-full bg-red-500 text-red-500 hover:text-white border-2 transition-all ease-in-out duration-300  border-red-500 bg-transparent hover:bg-red-600"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={!stripe || !clientSecret}
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          className={`px-4 py-2 text-sm rounded-full font-bold border-2  border-deepTeal  ${
+            isSubmitting
+              ? "cursor-not-allowed"
+              : "text-deepTeal bg-transparent transition-all ease-in-out duration-300  hover:bg-deepTeal hover:text-white"
+          }`}
         >
-          Pay Now
+          {isSubmitting ? (
+            <div className="flex justify-center items-center">
+              <span className="loading loading-spinner text-success"></span>
+            </div>
+          ) : (
+            "Pay Now"
+          )}
         </button>
       </div>
     </form>

@@ -18,10 +18,7 @@ const HowToEarn = () => {
                 className="w-[560px] h-[190px] md:h-[315px] rounded-xl shadow-2xl"
                 src="https://www.youtube.com/embed/OjZ9KOMJSKo?si=Zy-xW82hUVvDB2EL"
                 title="YouTube video player"
-                frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
               ></iframe>
             </div>
 

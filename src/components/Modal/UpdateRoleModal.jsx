@@ -27,7 +27,7 @@ const UpdateRoleModal = ({ user, isOpen, closeModal, updateRole }) => {
               id="role"
               defaultValue={user && user?.role}
               onChange={(e) => setSelectedRole(e.target.value)}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500"
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500"
             >
               <option value="Admin">Admin</option>
               <option value="Buyer">Buyer</option>
@@ -39,13 +39,13 @@ const UpdateRoleModal = ({ user, isOpen, closeModal, updateRole }) => {
             <button
               type="button"
               onClick={closeModal}
-              className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md"
+              className="px-4 py-2 bg-gray-300 text-gray-800 hover:bg-gray-400 rounded-md"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-600 text-white rounded-md"
+              className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-md"
             >
               Update Role
             </button>

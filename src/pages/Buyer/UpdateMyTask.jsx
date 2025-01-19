@@ -11,6 +11,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 const UpdateMyTask = () => {
   const { id } = useParams(); // Get task ID from the URL
   const [startDate, setStartDate] = useState(new Date());
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [taskData, setTaskData] = useState({});
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -82,11 +83,14 @@ const UpdateMyTask = () => {
       },
     };
 
+    setIsSubmitting(true);
     try {
       await axiosSecure.put(`/tasks/${id}`, formData);
       toast.success("Task updated successfully");
       navigate("/dashboard/my-task");
+      setIsSubmitting(false);
     } catch (err) {
+      setIsSubmitting(false);
       toast.error(err?.message);
     }
   };
@@ -221,9 +225,20 @@ const UpdateMyTask = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+          disabled={isSubmitting}
+          className={`w-full px-4 py-2 text-sm rounded-full font-bold border-2  border-deepTeal  ${
+            isSubmitting
+              ? "cursor-not-allowed"
+              : "text-deepTeal bg-transparent transition-all ease-in-out duration-300  hover:bg-deepTeal hover:text-white"
+          }`}
         >
-          Update Task
+          {isSubmitting ? (
+            <div className="flex justify-center items-center">
+              <span className="loading loading-spinner text-success"></span>
+            </div>
+          ) : (
+            "Update Task"
+          )}
         </button>
       </form>
     </div>

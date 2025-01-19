@@ -5,12 +5,14 @@ import { format } from "date-fns";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { FaCoins, FaUser } from "react-icons/fa";
+import { useState } from "react";
 
 const TaskDetails = () => {
   const { user } = useAuth();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { data: task = {} } = useQuery({
     queryKey: ["task", id],
@@ -52,11 +54,14 @@ const TaskDetails = () => {
       submitAt: new Date(),
     };
 
+    setIsSubmitting(true);
     try {
       const data = await axiosSecure.post("/add-submission", submissionData);
       toast.success("Task added successfully");
       navigate("/dashboard/my-submissions");
+      setIsSubmitting(false);
     } catch (err) {
+      setIsSubmitting(false);
       toast.error(err?.message);
     }
   };
@@ -114,9 +119,20 @@ const TaskDetails = () => {
           <div className="text-center">
             <button
               type="submit"
-              className="w-full px-4 py-2 text-sm rounded-full font-bold text-deepTeal border-2 border-deepTeal bg-transparent transition-all ease-in-out duration-300 hover:bg-deepTeal hover:text-white"
+              disabled={isSubmitting}
+              className={`w-full px-4 py-2 text-sm rounded-full font-bold border-2  border-deepTeal  ${
+                isSubmitting
+                  ? "cursor-not-allowed"
+                  : "text-deepTeal bg-transparent transition-all ease-in-out duration-300  hover:bg-deepTeal hover:text-white"
+              }`}
             >
-              Submit
+              {isSubmitting ? (
+                <div className="flex justify-center items-center">
+                  <span className="loading loading-spinner text-success"></span>
+                </div>
+              ) : (
+                "Submit"
+              )}
             </button>
           </div>
         </form>

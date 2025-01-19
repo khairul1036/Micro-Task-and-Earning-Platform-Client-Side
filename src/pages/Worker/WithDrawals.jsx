@@ -10,6 +10,7 @@ const WithDrawals = () => {
   const [coinsToWithdraw, setCoinsToWithdraw] = useState(0);
   const [paymentSystem, setPaymentSystem] = useState("");
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Calculate the withdrawal amount in dollars
   const withdrawAmount = coinsToWithdraw / 20;
@@ -28,18 +29,20 @@ const WithDrawals = () => {
       account_number: accountNumber,
       withdraw_date: new Date(),
     };
-
+    setIsSubmitting(true);
     try {
       const { data } = await axiosSecure.post("/withdraw", formData);
       toast.success("Withdraw requested success!!");
       navigate("/dashboard");
+      setIsSubmitting(false);
     } catch (err) {
+      setIsSubmitting(false);
       toast.error(err?.message);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-6 rounded-lg">
+    <div className="max-w-md mx-auto bg-white p-6 rounded-lg my-5">
       <h2 className="text-2xl font-semibold text-center mb-6">
         Withdrawal Form
       </h2>
@@ -135,9 +138,20 @@ const WithDrawals = () => {
           {coinsToWithdraw >= 200 ? (
             <button
               type="submit"
-              className="w-full px-4 py-2 mt-4 text-sm rounded-full font-bold text-deepTeal border-2 border-deepTeal bg-transparent transition-all ease-in-out duration-300 hover:bg-deepTeal hover:text-white"
+              disabled={isSubmitting}
+              className={`w-full px-4 py-2 text-sm rounded-full font-bold border-2  border-deepTeal  ${
+                isSubmitting
+                  ? "cursor-not-allowed"
+                  : "text-deepTeal bg-transparent transition-all ease-in-out duration-300  hover:bg-deepTeal hover:text-white"
+              }`}
             >
-              Withdraw
+              {isSubmitting ? (
+                <div className="flex justify-center items-center">
+                  <span className="loading loading-spinner text-success"></span>
+                </div>
+              ) : (
+                "Withdraw"
+              )}
             </button>
           ) : (
             <p className="text-red-500 text-sm mt-2">

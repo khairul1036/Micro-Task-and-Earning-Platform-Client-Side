@@ -23,19 +23,25 @@ const PurchaseCoin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-8 px-4">
+    <div className="bg-gray-100 flex items-center justify-center py-8 px-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {packages.map((pkg, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg shadow-lg p-6 text-center transform transition-transform hover:scale-105"
+            className="bg-white rounded-lg shadow-lg p-6 text-center transform transition-transform hover:scale-105 z-0"
           >
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">{pkg.name}</h2>
-            <div className="text-4xl font-bold text-blue-600 mb-4">{pkg.coins} Coins</div>
-            <div className="text-xl font-semibold text-gray-500 mb-4">${pkg.price}</div>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              {pkg.name}
+            </h2>
+            <div className="text-4xl font-bold text-teal-600 mb-4">
+              {pkg.coins} Coins
+            </div>
+            <div className="text-xl font-semibold text-black mb-4">
+              ${pkg.price}
+            </div>
             <button
               onClick={() => openModal(pkg)}
-              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition"
+              className="w-full px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-deepTeal bg-deepTeal transition-all ease-in-out duration-300 hover:bg-transparent hover:text-deepTeal"
             >
               Buy Now
             </button>
