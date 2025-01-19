@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import MySubmissionTableRow from "../../components/Worker/MySubmissionTableRow";
 import { useState } from "react";
+import Loading from "../../components/Loading";
 
 const MySubmission = () => {
   const { user } = useAuth();
@@ -22,44 +23,47 @@ const MySubmission = () => {
 
   const totalPages = Math.ceil(data?.total / limit) || 1;
 
+  if (isLoading) return <Loading />;
+
   return (
     <section className="container px-4 mx-auto pt-12">
       <div className="flex items-center gap-x-3">
         <h2 className="text-lg font-medium text-gray-800">My Submissions</h2>
         <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full">
-          {data?.total || 0} Submission{data?.total !== 1 && "s"}
+          {data?.mySubmissions?.length || 0} Submissions
         </span>
       </div>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="flex flex-col mt-6">
-          <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-              <div className="overflow-hidden border border-gray-200 md:rounded-lg">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="py-3.5 px-4 text-sm font-normal text-left text-gray-500">
-                        Title
-                      </th>
-                      <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
-                        SubmitAt
-                      </th>
-                      <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
-                        Payable Amount
-                      </th>
-                      <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
-                        Buyer Name
-                      </th>
-                      <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
-                        Submission Details
-                      </th>
-                      <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
-                        Status
-                      </th>
-                    </tr>
-                  </thead>
+      <div className="flex flex-col mt-6">
+        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div className="overflow-hidden border border-gray-200 md:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="py-3.5 px-4 text-sm font-normal text-left text-gray-500">
+                      Title
+                    </th>
+                    <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
+                      SubmitAt
+                    </th>
+                    <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
+                      Payable Amount
+                    </th>
+                    <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
+                      Buyer Name
+                    </th>
+                    <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
+                      Submission Details
+                    </th>
+                    <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+
+                {data?.mySubmissions?.length === 0 ? (
+                  <p className="text-center py-5">No Submission</p>
+                ) : (
                   <tbody className="bg-white divide-y divide-gray-200">
                     {data?.mySubmissions?.map((mySubmission, index) => (
                       <MySubmissionTableRow
@@ -68,12 +72,13 @@ const MySubmission = () => {
                       />
                     ))}
                   </tbody>
-                </table>
-              </div>
+                )}
+              </table>
             </div>
           </div>
         </div>
-      )}
+      </div>
+
       {/* Pagination */}
       <div className="flex justify-center mt-4">
         <div className="btn-group flex items-center gap-2">

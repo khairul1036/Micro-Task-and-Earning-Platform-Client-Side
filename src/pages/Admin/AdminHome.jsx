@@ -1,15 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loading from "../../components/Loading";
 
 const AdminHome = () => {
   const axiosSecure = useAxiosSecure();
-  const { data, refetch } = useQuery({
+  const { data, refetch, isLoading } = useQuery({
     queryKey: ["data"],
     queryFn: async () => {
       const { data } = await axiosSecure(`/admin-home`);
       return data;
     },
   });
+
+  if (isLoading) return <Loading />;
 
   const handlePayment = async (id) => {
     try {
@@ -83,53 +86,59 @@ const AdminHome = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200 ">
-                    {data?.pendingWithdrawals?.map((pendingWithdrawal) => (
-                      <tr key={pendingWithdrawal?._id}>
-                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                          {pendingWithdrawal?.worker_name}
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                          {pendingWithdrawal?.account_number}
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                          {pendingWithdrawal?.payment_system}
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                          {pendingWithdrawal?.withdrawal_coin}
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                          {pendingWithdrawal?.withdrawal_amount}
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                          <div className="flex items-center gap-x-2">
-                            <p
-                              className={`px-3 py-1 ${
-                                pendingWithdrawal?.status === "Pending" &&
-                                "text-yellow-500 bg-yellow-100/60"
-                              } ${
-                                pendingWithdrawal?.status === "Approved" &&
-                                "text-green-500 bg-green-100/60"
-                              } text-xs rounded-full`}
+                  {data?.pendingWithdrawals?.length === 0 ? (
+                    <p className="text-center py-4">No withdrawal request</p>
+                  ) : (
+                    <tbody className="bg-white divide-y divide-gray-200 ">
+                      {data?.pendingWithdrawals?.map((pendingWithdrawal) => (
+                        <tr key={pendingWithdrawal?._id}>
+                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            {pendingWithdrawal?.worker_name}
+                          </td>
+                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            {pendingWithdrawal?.account_number}
+                          </td>
+                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            {pendingWithdrawal?.payment_system}
+                          </td>
+                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            {pendingWithdrawal?.withdrawal_coin}
+                          </td>
+                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            {pendingWithdrawal?.withdrawal_amount}
+                          </td>
+                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            <div className="flex items-center gap-x-2">
+                              <p
+                                className={`px-3 py-1 ${
+                                  pendingWithdrawal?.status === "Pending" &&
+                                  "text-yellow-500 bg-yellow-100/60"
+                                } ${
+                                  pendingWithdrawal?.status === "Approved" &&
+                                  "text-green-500 bg-green-100/60"
+                                } text-xs rounded-full`}
+                              >
+                                {pendingWithdrawal?.status}
+                              </p>
+                            </div>
+                          </td>
+                          <td className="px-4 py-4 text-sm whitespace-nowrap">
+                            <button
+                              disabled={
+                                pendingWithdrawal?.status === "Approved"
+                              }
+                              onClick={() =>
+                                handlePayment(pendingWithdrawal?._id)
+                              }
+                              className="btn px-4 py-1 bg-teal-600 hover:bg-teal-700 text-white"
                             >
-                              {pendingWithdrawal?.status}
-                            </p>
-                          </div>
-                        </td>
-                        <td className="px-4 py-4 text-sm whitespace-nowrap">
-                          <button
-                            disabled={pendingWithdrawal?.status === "Approved"}
-                            onClick={() =>
-                              handlePayment(pendingWithdrawal?._id)
-                            }
-                            className="btn px-4 py-1 bg-teal-600 hover:bg-teal-700 text-white"
-                          >
-                            pay
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
+                              pay
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  )}
                 </table>
               </div>
             </div>

@@ -2,17 +2,20 @@ import React from "react";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loading from "../../components/Loading";
 
 const WorkerHome = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["data", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure(`/worker-home/${user?.email}`);
       return data;
     },
   });
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="p-6">
@@ -79,33 +82,41 @@ const WorkerHome = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200 ">
-                    {data?.approvedSubmissions?.map((approvedSubmission) => (
-                      <>
-                        <tr>
-                          <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                            {approvedSubmission?.task_title}
-                          </td>
-                          <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                            {approvedSubmission?.buyer_name}
-                          </td>
-
-                          <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                            {approvedSubmission?.payable_amount}
-                          </td>
-                          <td className="px-4 py-4 text-sm whitespace-nowrap">
-                            <div className="flex items-center gap-x-2">
-                              <p
-                                className={`px-3 py-1  text-green-500 bg-green-100/60 text-xs  rounded-full`}
-                              >
-                                {approvedSubmission?.status}
-                              </p>
-                            </div>
-                          </td>
-                        </tr>
-                      </>
-                    ))}
-                  </tbody>
+                  {data?.approvedSubmissions.length === 0 ? (
+                    <p
+                      className="text-xl py-5 text-center text-gray-600
+                    "
+                    >
+                      No Data
+                    </p>
+                  ) : (
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {data?.approvedSubmissions?.map(
+                        (approvedSubmission, index) => (
+                          <tr key={index}>
+                            <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                              {approvedSubmission?.task_title}
+                            </td>
+                            <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                              {approvedSubmission?.buyer_name}
+                            </td>
+                            <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                              {approvedSubmission?.payable_amount}
+                            </td>
+                            <td className="px-4 py-4 text-sm whitespace-nowrap">
+                              <div className="flex items-center gap-x-2">
+                                <p
+                                  className={`px-3 py-1 text-green-500 bg-green-100/60 text-xs rounded-full`}
+                                >
+                                  {approvedSubmission?.status}
+                                </p>
+                              </div>
+                            </td>
+                          </tr>
+                        )
+                      )}
+                    </tbody>
+                  )}
                 </table>
               </div>
             </div>

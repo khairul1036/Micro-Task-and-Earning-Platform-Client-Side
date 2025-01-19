@@ -1,9 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import bgImg from "../../assets/images/register.jpg";
+import bgImg from "../../assets/images/login.webp";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 import { saveUser } from "../../api/utils";
+import HelmetTitle from "../langdingPages/Share/HelmetTitle";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Login = () => {
       const data = await signInWithGoogle();
       await saveUser(data?.user);
       toast.success("Signin Successful");
-      navigate(from, { replace: true });
+      navigate('/dashboard');
     } catch (err) {
       toast.error(err?.message);
     }
@@ -56,7 +57,7 @@ const Login = () => {
       //User Login
       await signIn(email, pass);
       toast.success("Signin Successful");
-      navigate(from, { replace: true });
+      navigate('/dashboard');
     } catch (err) {
       toast.error("Invalid credential");
     }
@@ -64,6 +65,7 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
+      <HelmetTitle favTitle={"Login || TaskEarn"} />
       <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl ">
         <div
           className="hidden bg-cover bg-center lg:block lg:w-1/2"
@@ -75,8 +77,8 @@ const Login = () => {
         <div className="w-full dark:bg-gray-800 px-6 py-8 md:px-8 lg:w-1/2">
           <div className="flex justify-center mx-auto">
             <img
-              className="w-auto h-7 sm:h-8"
-              src="https://www.fixtronics.us/wp-content/uploads/2020/12/fixtronics-300x300.png"
+              className="w-auto h-7 sm:h-8 rounded-full"
+              src="https://static.vecteezy.com/system/resources/previews/010/360/283/non_2x/earn-money-logo-vector.jpg"
               alt="logo"
             />
           </div>
@@ -162,7 +164,7 @@ const Login = () => {
             <div className="mt-6">
               <button
                 type="submit"
-                className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
+                className="w-full px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-deepTeal bg-deepTeal transition-all ease-in-out duration-300 hover:bg-transparent hover:text-deepTeal"
               >
                 Sign In
               </button>

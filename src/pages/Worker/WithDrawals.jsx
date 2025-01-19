@@ -39,7 +39,7 @@ const WithDrawals = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div className="max-w-md mx-auto bg-white p-6 rounded-lg">
       <h2 className="text-2xl font-semibold text-center mb-6">
         Withdrawal Form
       </h2>
@@ -67,8 +67,9 @@ const WithDrawals = () => {
             onChange={(e) => setCoinsToWithdraw(e.target.value)}
             min={0}
             max={users?.coins}
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepTeal"
             placeholder="Enter number of coins"
+            required
           />
         </div>
 
@@ -85,7 +86,7 @@ const WithDrawals = () => {
             id="withdrawAmount"
             value={withdrawAmount}
             readOnly
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepTeal"
           />
         </div>
 
@@ -99,9 +100,10 @@ const WithDrawals = () => {
           </label>
           <select
             id="paymentSystem"
+            required
             value={paymentSystem}
             onChange={(e) => setPaymentSystem(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepTeal"
           >
             <option value="">Select Payment System</option>
             <option value="Bkash">Bkash</option>
@@ -120,9 +122,10 @@ const WithDrawals = () => {
           </label>
           <input
             type="text"
+            required
             id="accountNumber"
             name="accountNumber"
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepTeal"
             placeholder="Enter account number"
           />
         </div>
@@ -132,7 +135,7 @@ const WithDrawals = () => {
           {coinsToWithdraw >= 200 ? (
             <button
               type="submit"
-              className="w-full py-3 px-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 mt-4 text-sm rounded-full font-bold text-deepTeal border-2 border-deepTeal bg-transparent transition-all ease-in-out duration-300 hover:bg-deepTeal hover:text-white"
             >
               Withdraw
             </button>

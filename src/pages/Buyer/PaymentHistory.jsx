@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import PaymentHistoryTableRow from "../../components/Buyer/PaymentHistoryTableRow";
+import Loading from "../../components/Loading";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -19,6 +20,8 @@ const PaymentHistory = () => {
       return data;
     },
   });
+
+  if (isLoading) return <Loading />;
 
   return (
     <section className="container px-4 mx-auto pt-12">
@@ -74,14 +77,18 @@ const PaymentHistory = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200 ">
-                  {payments.map((payment) => (
-                    <PaymentHistoryTableRow
-                      key={payment._id}
-                      payment={payment}
-                    />
-                  ))}
-                </tbody>
+                {payments?.length === 0 ? (
+                  <p className="text-center py-4">No history</p>
+                ) : (
+                  <tbody className="bg-white divide-y divide-gray-200 ">
+                    {payments.map((payment) => (
+                      <PaymentHistoryTableRow
+                        key={payment._id}
+                        payment={payment}
+                      />
+                    ))}
+                  </tbody>
+                )}
               </table>
             </div>
           </div>

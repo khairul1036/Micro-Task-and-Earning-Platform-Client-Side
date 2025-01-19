@@ -4,10 +4,15 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import ManageTasksTableRow from "../../components/Admin/ManageTasksTableRow";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import Loading from "../../components/Loading";
 
 const ManageTasks = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: tasks = [], refetch } = useQuery({
+  const {
+    data: tasks = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["task"],
     queryFn: async () => {
       const { data } = await axiosSecure("/all-task");
@@ -43,6 +48,8 @@ const ManageTasks = () => {
       toast.error(error?.response?.data);
     }
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <section className="container px-4 mx-auto pt-12">
@@ -104,15 +111,19 @@ const ManageTasks = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200 ">
-                  {tasks.map((task) => (
-                    <ManageTasksTableRow
-                      key={task._id}
-                      task={task}
-                      handleDelete={handleDelete}
-                    />
-                  ))}
-                </tbody>
+                {tasks?.length === 0 ? (
+                  <p className="text-center py-4">No tasks</p>
+                ) : (
+                  <tbody className="bg-white divide-y divide-gray-200 ">
+                    {tasks.map((task) => (
+                      <ManageTasksTableRow
+                        key={task._id}
+                        task={task}
+                        handleDelete={handleDelete}
+                      />
+                    ))}
+                  </tbody>
+                )}
               </table>
             </div>
           </div>

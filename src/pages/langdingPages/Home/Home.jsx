@@ -6,10 +6,12 @@ import EarningOpportunities from "./EarningOpportunities";
 import HowToEarn from "./HowToEarn";
 import HowItWorks from "./HowItWorks";
 import CallToActionSection from "./CallToActionSection";
+import HelmetTitle from "../Share/HelmetTitle";
 
 const Home = () => {
   return (
     <>
+      <HelmetTitle favTitle={"Home || TaskEarn"} />
       {/* hero section  */}
       <div>
         <HeroSection />

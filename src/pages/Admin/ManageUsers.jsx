@@ -63,7 +63,7 @@ const ManageUsers = () => {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const {data} = await axiosSecure.delete(`/delete-user/${id}`);
+          const { data } = await axiosSecure.delete(`/delete-user/${id}`);
           if (data?.deletedCount > 0) {
             Swal.fire({
               title: "Deleted!",
@@ -94,6 +94,13 @@ const ManageUsers = () => {
   return (
     <div>
       <div className="py-8">
+        <div className="flex items-center gap-x-3">
+          <h2 className="text-lg font-medium text-gray-800 ">Total Users</h2>
+
+          <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">
+            {users?.length} User
+          </span>
+        </div>
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
             <table className="min-w-full leading-normal">
@@ -120,16 +127,20 @@ const ManageUsers = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                {users?.map((userData) => (
-                  <ManageUsersTableRow
-                    key={userData?._id}
-                    userData={userData}
-                    openModal={openModal} // Pass function to open modal
-                    userDelete={userDelete}
-                  />
-                ))}
-              </tbody>
+              {users?.length === 0 ? (
+                <p className="text-center py-4">No users</p>
+              ) : (
+                <tbody>
+                  {users?.map((userData) => (
+                    <ManageUsersTableRow
+                      key={userData?._id}
+                      userData={userData}
+                      openModal={openModal} // Pass function to open modal
+                      userDelete={userDelete}
+                    />
+                  ))}
+                </tbody>
+              )}
             </table>
           </div>
         </div>

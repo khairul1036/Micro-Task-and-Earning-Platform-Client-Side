@@ -16,9 +16,9 @@ const Notification = ({ notifications }) => {
         <div className="modal-box">
           <h3 className="font-bold text-lg text-center pb-4">Notifications</h3>
 
-          {notifications.map((notification) => (
+          {notifications.map((notification, index) => (
             <>
-              <div key={notification._id} className="border rounded-xl px-4 py-1 my-2">
+              <div key={index} className="border rounded-xl px-4 py-1 my-2">
                 <p className="text-gray-700 text-sm">{notification?.message}</p>
                 <p className="text-xs text-gray-600">
                   {notification?.Time

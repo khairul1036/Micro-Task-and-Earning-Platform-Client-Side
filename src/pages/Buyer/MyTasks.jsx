@@ -4,6 +4,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import MyTasksTableRow from "../../components/Buyer/MyTasksTableRow";
 import FetchData from "../../hooks/FetchData";
+import Loading from "../../components/Loading";
 
 const MyTasks = () => {
   const { user } = useAuth();
@@ -55,9 +56,9 @@ const MyTasks = () => {
     }
   };
 
-  //   if(isLoading){
-  //     return <Loading/>
-  //   }
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <section className="container px-4 mx-auto pt-12">
@@ -119,15 +120,19 @@ const MyTasks = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200 ">
-                  {tasks.map((task) => (
-                    <MyTasksTableRow
-                      key={task._id}
-                      task={task}
-                      handleDelete={handleDelete}
-                    />
-                  ))}
-                </tbody>
+                {tasks?.length === 0 ? (
+                  <p className="text-center py-4">No my task</p>
+                ) : (
+                  <tbody className="bg-white divide-y divide-gray-200 ">
+                    {tasks.map((task) => (
+                      <MyTasksTableRow
+                        key={task._id}
+                        task={task}
+                        handleDelete={handleDelete}
+                      />
+                    ))}
+                  </tbody>
+                )}
               </table>
             </div>
           </div>

@@ -6,6 +6,7 @@ import { MdDoNotDisturbAlt } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import { IoEyeOutline } from "react-icons/io5";
 import toast from "react-hot-toast";
+import Loading from "../../components/Loading";
 
 const BuyerHome = () => {
   const { user } = useAuth();
@@ -13,7 +14,7 @@ const BuyerHome = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSubmission, setSelectedSubmission] = useState(null);
 
-  const { data, refetch } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["data", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure(`/buyer-home/${user?.email}`);
@@ -51,6 +52,8 @@ const BuyerHome = () => {
     setIsOpen(false);
     setSelectedSubmission(null); // Clear selected submission when modal is closed
   };
+
+  if(isLoading) return <Loading/>
 
   return (
     <div className="p-6">
@@ -107,58 +110,62 @@ const BuyerHome = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200 ">
-                    {data?.pendingSubmissions?.map((pendingSubmission) => (
-                      <tr key={pendingSubmission?._id}>
-                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                          {pendingSubmission?.task_title}
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                          {pendingSubmission?.worker_name}
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                          $ {pendingSubmission?.payable_amount}
-                        </td>
-                        <td className="px-4 py-4 text-sm whitespace-nowrap">
-                          <div className="flex items-center gap-x-2">
-                            <p
-                              className={`px-3 py-1 text-yellow-500 bg-yellow-100/60 text-xs rounded-full`}
-                            >
-                              {pendingSubmission?.status}
-                            </p>
-                          </div>
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                          <button
-                            onClick={() => openModal(pendingSubmission)}
-                            className="text-gray-500 transition-colors duration-200 flex items-center hover:text-teal-600 focus:outline-none"
-                          >
-                            <IoEyeOutline className="text-2xl" />
-                          </button>
-                        </td>
-                        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                          <div className="flex items-center gap-5">
+                  {data?.pendingSubmissions?.length === 0 ? (
+                    <p className="text-center py-4">No Submission Pending</p>
+                  ) : (
+                    <tbody className="bg-white divide-y divide-gray-200 ">
+                      {data?.pendingSubmissions?.map((pendingSubmission) => (
+                        <tr key={pendingSubmission?._id}>
+                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            {pendingSubmission?.task_title}
+                          </td>
+                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            {pendingSubmission?.worker_name}
+                          </td>
+                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            $ {pendingSubmission?.payable_amount}
+                          </td>
+                          <td className="px-4 py-4 text-sm whitespace-nowrap">
+                            <div className="flex items-center gap-x-2">
+                              <p
+                                className={`px-3 py-1 text-yellow-500 bg-yellow-100/60 text-xs rounded-full`}
+                              >
+                                {pendingSubmission?.status}
+                              </p>
+                            </div>
+                          </td>
+                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
                             <button
-                              onClick={() =>
-                                handleApproved(pendingSubmission?._id)
-                              }
-                              className="text-gray-500 transition-colors duration-200 hover:text-green-500 focus:outline-none"
+                              onClick={() => openModal(pendingSubmission)}
+                              className="text-gray-500 transition-colors duration-200 flex items-center hover:text-teal-600 focus:outline-none"
                             >
-                              <FaCheck className="text-2xl" />
+                              <IoEyeOutline className="text-2xl" />
                             </button>
-                            <button
-                              onClick={() =>
-                                handleReject(pendingSubmission?._id)
-                              }
-                              className="text-gray-500 transition-colors duration-200 hover:text-red-500 focus:outline-none"
-                            >
-                              <MdDoNotDisturbAlt className="text-2xl" />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
+                          </td>
+                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            <div className="flex items-center gap-5">
+                              <button
+                                onClick={() =>
+                                  handleApproved(pendingSubmission?._id)
+                                }
+                                className="text-gray-500 transition-colors duration-200 hover:text-green-500 focus:outline-none"
+                              >
+                                <FaCheck className="text-2xl" />
+                              </button>
+                              <button
+                                onClick={() =>
+                                  handleReject(pendingSubmission?._id)
+                                }
+                                className="text-gray-500 transition-colors duration-200 hover:text-red-500 focus:outline-none"
+                              >
+                                <MdDoNotDisturbAlt className="text-2xl" />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  )}
                 </table>
               </div>
             </div>

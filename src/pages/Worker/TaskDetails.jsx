@@ -4,6 +4,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { format } from "date-fns";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { FaCoins, FaUser } from "react-icons/fa";
 
 const TaskDetails = () => {
   const { user } = useAuth();
@@ -61,93 +62,65 @@ const TaskDetails = () => {
   };
 
   return (
-    <div className="container mx-auto p-8">
-      {/* Header Section */}
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl font-semibold text-gray-800">{task_title}</h1>
-        <p className="text-lg text-gray-600">{buyer?.name}</p>
-      </div>
-
-      {/* Task Details */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div>
+    <div className="card lg:card-side bg-base-100 shadow-xl rounded-lg">
+      <div className="lg:w-1/2">
+        <figure>
           <img
             src={photoURL}
-            alt="image"
-            className="rounded-lg shadow-lg w-full h-auto object-cover mb-6"
+            alt="Album"
+            className="object-cover w-full h-auto"
           />
-        </div>
-        <div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              Task Details
-            </h2>
-            <p className="text-gray-600 mb-4">{task_detail}</p>
-
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <p className="text-gray-500">Submission Info</p>
-                <p className="text-lg font-medium">{submission_info}</p>
-              </div>
-              <div>
-                <p className="text-gray-500">Completion Date</p>
-                <p className="text-lg font-medium">
-                  {completion_date
-                    ? format(new Date(completion_date), "P")
-                    : "N/A"}
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <p className="text-gray-500">Payable Amount</p>
-                <p className="text-lg font-medium">${payable_amount}</p>
-              </div>
-              <div>
-                <p className="text-gray-500">Required Workers</p>
-                <p className="text-lg font-medium">{required_workers}</p>
-              </div>
-            </div>
-
-            <div className="mb-4">
-              <p className="text-gray-500">Total Payable Amount</p>
-              <p className="text-lg font-semibold text-green-600">
-                ${total_payable_amount}
-              </p>
-            </div>
-          </div>
-        </div>
+        </figure>
       </div>
+      <div className="lg:w-1/2 card-body">
+        <p className="flex justify-between gap-4 items-center">
+          <span className="bg-teal-100/60 text-teal-600 px-2 rounded-xl">
+            Deadline:
+            {completion_date && format(new Date(completion_date), "P")}
+          </span>
+          <span className="flex items-center gap-1 bg-yellow-100/60 text-yellow-600 px-2 rounded-xl">
+            <FaUser /> {required_workers}
+          </span>
+        </p>
+        <h2 className="card-title">{task_title}</h2>
+        <p>{task_detail}</p>
+        <p className="text-gray-600">Buyer: {buyer?.name}</p>
+        <p className="text-gray-600 flex items-center gap-2 py-1">
+          Earn: <FaCoins /> {payable_amount}
+        </p>
+        <p className="font-semibold">What you will submit?</p>
+        <h2>{submission_info}</h2>
 
-      <form onSubmit={handleSubmit}>
-        {/* submission_Details */}
-        <div className="mb-6">
-          <label
-            htmlFor="submission_details"
-            className="block text-lg font-medium text-gray-700 mb-2"
-          >
-            Submission Details
-          </label>
-          <textarea
-            id="submission_details"
-            name="submission_details"
-            rows="4"
-            placeholder="Enter submission details..."
-            className="w-full bg-gray-100 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-          />
-        </div>
+        {/* submission form  */}
+        <form onSubmit={handleSubmit}>
+          {/* submission_Details */}
+          <div className="mb-6">
+            <label
+              htmlFor="submission_details"
+              className="block text-lg font-medium text-gray-700 mb-2"
+            >
+              Submission Details
+            </label>
+            <textarea
+              id="submission_details"
+              name="submission_details"
+              rows="4"
+              placeholder="Enter submission details..."
+              className="w-full bg-gray-100 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-deepTeal focus:border-transparent resize-none"
+            />
+          </div>
 
-        {/* Submit Button */}
-        <div className="mt-6 text-center">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 transition focus:outline-none"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+          {/* Submit Button */}
+          <div className="text-center">
+            <button
+              type="submit"
+              className="w-full px-4 py-2 text-sm rounded-full font-bold text-deepTeal border-2 border-deepTeal bg-transparent transition-all ease-in-out duration-300 hover:bg-deepTeal hover:text-white"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
