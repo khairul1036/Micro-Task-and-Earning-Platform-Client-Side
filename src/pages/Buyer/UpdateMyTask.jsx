@@ -36,7 +36,7 @@ const UpdateMyTask = () => {
           setValue(key, task[key]);
         }
       } catch (err) {
-        console.error("Error fetching task:", err);
+        toast.error("Error fetching task:");
       }
     };
     fetchTask();

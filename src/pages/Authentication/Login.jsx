@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/images/login.webp";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 import { saveUser } from "../../api/utils";
@@ -9,9 +9,10 @@ import HelmetTitle from "../langdingPages/Share/HelmetTitle";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const from = location?.state || "/";
 
-  const { signIn, signInWithGoogle, loading, setLoading } = useContext(AuthContext);
+  const { signIn, signInWithGoogle } = useContext(AuthContext);
 
   // Google Signin
   const handleGoogleSignIn = async () => {
@@ -53,13 +54,15 @@ const Login = () => {
       return toast.error("Password must be at least 6 characters.");
     }
 
+    setIsSubmitting(true);
     try {
       //User Login
       await signIn(email, pass);
       toast.success("Signin Successful");
+      setIsSubmitting(false);
       navigate("/dashboard");
     } catch (err) {
-      setLoading(false)
+      setIsSubmitting(false);
       toast.error("Invalid credential");
     }
   };
@@ -165,9 +168,14 @@ const Login = () => {
             <div className="mt-6">
               <button
                 type="submit"
-                className="w-full px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-deepTeal bg-deepTeal transition-all ease-in-out duration-300 hover:bg-transparent hover:text-deepTeal"
+                disabled={isSubmitting}
+                className={`w-full px-4 py-2 text-sm rounded-full font-bold border-2  border-deepTeal  ${
+                  isSubmitting
+                    ? "cursor-not-allowed"
+                    : "text-deepTeal bg-transparent transition-all ease-in-out duration-300  hover:bg-deepTeal hover:text-white"
+                }`}
               >
-                {loading ? (
+                {isSubmitting ? (
                   <div className="flex justify-center items-center">
                     <span className="loading loading-spinner text-success"></span>
                   </div>

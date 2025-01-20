@@ -112,6 +112,7 @@ const TaskDetails = () => {
               rows="4"
               placeholder="Enter submission details..."
               className="w-full bg-gray-100 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-deepTeal focus:border-transparent resize-none"
+              required
             />
           </div>
 

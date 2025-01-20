@@ -36,7 +36,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to={"/join-developer"}
+          to={"https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-khairul1036"}
           className={({ isActive }) =>
             `hover:text-teal-600 ${
               isActive
@@ -44,6 +44,7 @@ const Navbar = () => {
                 : "text-gray-600 dark:text-gray-50"
             }`
           }
+          target="_blank"
         >
           Join as Developer
         </NavLink>

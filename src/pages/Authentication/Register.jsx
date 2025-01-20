@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/images/reg.avif";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
@@ -9,8 +9,14 @@ import HelmetTitle from "../langdingPages/Share/HelmetTitle";
 
 const Registration = () => {
   const navigate = useNavigate();
-  const { signInWithGoogle, createUser, updateUserProfile, loading, setLoading } =
-    useContext(AuthContext);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const {
+    signInWithGoogle,
+    createUser,
+    updateUserProfile,
+    loading,
+    setLoading,
+  } = useContext(AuthContext);
 
   const {
     register,
@@ -21,6 +27,7 @@ const Registration = () => {
   const handleSignUp = async (data) => {
     const { name, email, photo, password, role } = data;
     const photoURL = await imageUpload(photo[0]);
+    setIsSubmitting(true);
     try {
       const result = await createUser(email, password);
       await updateUserProfile(name, photoURL);
@@ -31,8 +38,10 @@ const Registration = () => {
         role,
       });
       toast.success("Signup Successful");
+      setIsSubmitting(false);
       navigate("/dashboard");
     } catch (err) {
+      setIsSubmitting(false);
       toast.error(err?.message);
     }
   };
@@ -44,7 +53,6 @@ const Registration = () => {
       toast.success("Signin Successful");
       navigate("/dashboard");
     } catch (err) {
-      setLoading(false)
       toast.error(err?.message);
     }
   };
@@ -228,9 +236,14 @@ const Registration = () => {
             <div className="mt-6">
               <button
                 type="submit"
-                className="w-full px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-deepTeal bg-deepTeal transition-all ease-in-out duration-300 hover:bg-transparent hover:text-deepTeal"
+                disabled={isSubmitting}
+                className={`w-full px-4 py-2 text-sm rounded-full font-bold border-2  border-deepTeal  ${
+                  isSubmitting
+                    ? "cursor-not-allowed"
+                    : "text-deepTeal bg-transparent transition-all ease-in-out duration-300  hover:bg-deepTeal hover:text-white"
+                }`}
               >
-                {loading ? (
+                {isSubmitting ? (
                   <div className="flex justify-center items-center">
                     <span className="loading loading-spinner text-success"></span>
                   </div>

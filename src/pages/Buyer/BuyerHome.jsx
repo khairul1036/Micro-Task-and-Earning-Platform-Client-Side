@@ -53,7 +53,7 @@ const BuyerHome = () => {
     setSelectedSubmission(null); // Clear selected submission when modal is closed
   };
 
-  if(isLoading) return <Loading/>
+  if (isLoading) return <Loading />;
 
   return (
     <div className="p-6">
@@ -76,9 +76,7 @@ const BuyerHome = () => {
       {/* Show data in table format */}
       <section className="container px-4 mx-auto pt-12">
         <div className="flex items-center gap-x-3">
-          <h2 className="text-lg font-medium text-gray-800">
-            My Approved Submission
-          </h2>
+          <h2 className="text-lg font-medium text-gray-800">Task To Review</h2>
         </div>
 
         <div className="flex flex-col mt-6">

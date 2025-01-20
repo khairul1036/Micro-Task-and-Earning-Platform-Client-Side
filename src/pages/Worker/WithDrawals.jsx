@@ -135,7 +135,7 @@ const WithDrawals = () => {
 
         {/* Withdraw Button */}
         <div className="text-center">
-          {coinsToWithdraw >= 200 ? (
+          {coinsToWithdraw >= 200 && coinsToWithdraw <= users?.coins ? (
             <button
               type="submit"
               disabled={isSubmitting}

@@ -16,7 +16,7 @@ const BestWorkers = () => {
     },
   });
   if (isLoading) return <Loading />;
-  // console.log(data);
+
   return (
     <>
       {/* pass the section titles */}

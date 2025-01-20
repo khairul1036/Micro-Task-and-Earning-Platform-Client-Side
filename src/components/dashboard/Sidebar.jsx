@@ -123,7 +123,7 @@ const Sidebar = ({ handleSidebar, isSidebarOpen }) => {
                         : "hover:bg-gray-600"
                     }`}
                   >
-                    <FaPlusCircle className="mr-3" />
+                    <FaTasks className="mr-3" />
                     My Tasks
                   </Link>
                   <Link

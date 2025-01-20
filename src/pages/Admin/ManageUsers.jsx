@@ -46,7 +46,7 @@ const ManageUsers = () => {
       toast.success("Update role success!!");
       refetch(); // Refetch users after role update
     } catch (error) {
-      console.error("Failed to update role", error);
+      toast.error("Failed to update role");
     }
   };
 
@@ -75,7 +75,7 @@ const ManageUsers = () => {
         }
       });
     } catch (error) {
-      console.error("Failed to delete user", error);
+      toast.error("Failed to delete user");
     }
   };
 
@@ -95,7 +95,9 @@ const ManageUsers = () => {
     <div>
       <div className="py-8">
         <div className="flex items-center gap-x-3">
-          <h2 className="text-lg font-medium text-gray-800 mx-5">Total Users</h2>
+          <h2 className="text-lg font-medium text-gray-800 mx-5">
+            Total Users
+          </h2>
 
           <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">
             {users?.length} User

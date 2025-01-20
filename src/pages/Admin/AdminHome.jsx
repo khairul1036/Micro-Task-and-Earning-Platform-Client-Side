@@ -105,7 +105,7 @@ const AdminHome = () => {
                             {pendingWithdrawal?.withdrawal_coin}
                           </td>
                           <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                            {pendingWithdrawal?.withdrawal_amount}
+                            $ {pendingWithdrawal?.withdrawal_amount}
                           </td>
                           <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
                             <div className="flex items-center gap-x-2">
@@ -132,7 +132,9 @@ const AdminHome = () => {
                               }
                               className="btn px-4 py-1 bg-teal-600 hover:bg-teal-700 text-white"
                             >
-                              pay
+                              {pendingWithdrawal?.status === "Approved"
+                                ? "paid"
+                                : "pay"}
                             </button>
                           </td>
                         </tr>

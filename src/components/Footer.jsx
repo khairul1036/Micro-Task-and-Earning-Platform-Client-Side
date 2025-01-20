@@ -30,16 +30,16 @@ const Footer = () => {
         <nav>
           <h6 className="text-2xl font-bold text-white">Social</h6>
           <div className="grid grid-flow-col gap-4 text-2xl">
-            <a href="#">
+            <a href="https://www.linkedin.com/in/khairul-islam1" target="_blank">
               <FaLinkedin />
             </a>
-            <a href="#">
+            <a href="https://www.facebook.com/khairul4102" target="_blank">
               <FaFacebook />
             </a>
-            <a href="#">
+            <a href="https://github.com/khairul1036" target="_blank">
               <FaGithub />
             </a>
-            <a href="#">
+            <a href="https://www.youtube.com/@khairulislammm" target="_blank">
               <FaYoutube />
             </a>
           </div>
