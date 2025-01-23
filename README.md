@@ -1,19 +1,10 @@
-# Assignment-12 Category- 19
-
-# TaskEarn
+# TaskEarn - micro-tasking and earning platform
 
 TaskEarn is a dynamic micro-tasking and earning platform designed to connect workers and buyers, providing opportunities to complete small tasks for rewards. This platform supports seamless task management, task creation, and platform administration.
 
-## Admin Credentials
-- **Username**: admin@gmail.com
-- **Password**: 123456
 
 ## Live Site URL
 [TaskEarn Live Site](https://taskearn-9782e.web.app)
-
-## GitHub Repositories
-- **Client Side**: [Client Repo](https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-khairul1036)
-- **Server Side**: [Server Repo](https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-khairul1036)
 
 
 ## Features
@@ -110,5 +101,12 @@ TaskEarn is a dynamic micro-tasking and earning platform designed to connect wor
 4. Run server:
    ```bash
    nodemon index.js
+
+
+
+## GitHub Repositories
+- **Client Side**: [Client Repo](https://github.com/khairul1036/Micro-Task-and-Earning-Platform-Client-Side)
+- **Server Side**: [Server Repo](https://github.com/khairul1036/Micro-Task-and-Earning-Platform-Server-Side)
+
 
 Happy Coding! 🚀

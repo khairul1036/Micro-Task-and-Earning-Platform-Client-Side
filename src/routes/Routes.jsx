@@ -20,12 +20,13 @@ import ManageUsers from "../pages/Admin/ManageUsers";
 import ManageTasks from "../pages/Admin/ManageTasks";
 import HomeShowRoleBase from "../components/HomeShowRoleBase";
 import WorkerRoute from "./WorkerRoute";
+import NotFound from "../pages/NotFound/NotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
-    // errorElement: <ErrorPage />,
+    errorElement: <NotFound/>,
     children: [
       {
         index: true,
