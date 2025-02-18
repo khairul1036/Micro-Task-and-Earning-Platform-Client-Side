@@ -18,12 +18,11 @@ const TaskList = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="p-8">
+    <div className="max-w-screen-2xl mx-auto py-8">
       {allTask?.length === 0 ? (
         <p className="flex justify-center">No Task Available</p>
       ) : (
         <>
-          {" "}
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">
             Available Tasks
           </h2>
@@ -32,7 +31,7 @@ const TaskList = () => {
             {allTask.map((task) => (
               <div
                 key={task._id}
-                className="bg-white rounded-lg p-6 transition-all ease-in-out duration-300 hover:scale-105"
+                className="bg-white rounded-lg p-6 transition-all ease-in-out duration-300 hover:border hover:border-deepTeal hover:scale-105"
               >
                 <p className="flex justify-between items-center">
                   <span className="bg-teal-100/60 text-teal-600 px-2 rounded-xl">

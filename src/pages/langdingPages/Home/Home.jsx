@@ -9,6 +9,7 @@ import CallToActionSection from "./CallToActionSection";
 import HelmetTitle from "../Share/HelmetTitle";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import TopTask from "./TopTask";
 
 const Home = () => {
   useEffect(() => {
@@ -21,22 +22,25 @@ const Home = () => {
       <div data-aos="zoom-in">
         <HeroSection />
       </div>
-      <div className="max-w-screen-2xl mx-auto" data-aos="fade-up">
+      <div className="max-w-screen-2xl mx-auto">
+        <TopTask />
+      </div>
+      <div className="max-w-screen-2xl mx-auto" >
         <BestWorkers />
       </div>
-      <div data-aos="fade-up">
+      <div>
         <HowToEarn />
       </div>
-      <div className="max-w-screen-2xl mx-auto" data-aos="fade-up">
+      <div className="max-w-screen-2xl mx-auto">
         <Testimonial />
       </div>
-      <div data-aos="flip-left">
+      <div>
         <EarningOpportunities />
       </div>
-      <div className="max-w-screen-2xl mx-auto" data-aos="fade-right">
+      <div className="max-w-screen-2xl mx-auto">
         <HowItWorks />
       </div>
-      <div data-aos="fade-up">
+      <div>
         <CallToActionSection />
       </div>
     </>

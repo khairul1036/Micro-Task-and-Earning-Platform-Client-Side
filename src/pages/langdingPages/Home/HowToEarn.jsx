@@ -16,7 +16,7 @@ const HowToEarn = () => {
             <div className="flex justify-center items-center">
               <iframe
                 className="w-[560px] h-[190px] md:h-[315px] rounded-xl shadow-2xl"
-                src="https://www.youtube.com/embed/OjZ9KOMJSKo?si=Zy-xW82hUVvDB2EL"
+                src="https://www.youtube.com/embed/Um_AfOK27Bk?si=BNKJGXa6LpQwxC7r"
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               ></iframe>
