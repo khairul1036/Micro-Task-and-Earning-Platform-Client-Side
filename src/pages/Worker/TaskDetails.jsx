@@ -67,13 +67,14 @@ const TaskDetails = () => {
   };
 
   return (
-    <div className="card lg:card-side bg-base-100 shadow-xl rounded-lg">
-      <div className="lg:w-1/2">
+    <div className="my-5 md:my-10">
+      <div className="card lg:card-side bg-base-100 shadow-xl rounded-lg max-w-screen-2xl mx-auto">
+      <div className="lg:w-1/2 mt-5">
         <figure>
           <img
             src={photoURL}
             alt="Album"
-            className="object-cover w-full h-auto"
+            className="object-cover w-full h-[500px] rounded-md"
           />
         </figure>
       </div>
@@ -138,6 +139,7 @@ const TaskDetails = () => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };

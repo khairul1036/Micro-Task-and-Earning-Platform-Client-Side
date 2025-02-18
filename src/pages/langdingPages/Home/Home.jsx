@@ -22,24 +22,31 @@ const Home = () => {
       <div data-aos="zoom-in">
         <HeroSection />
       </div>
+
       <div className="max-w-screen-2xl mx-auto">
         <TopTask />
       </div>
-      <div className="max-w-screen-2xl mx-auto" >
+
+      <div className="max-w-screen-2xl mx-auto">
         <BestWorkers />
       </div>
+
       <div>
         <HowToEarn />
       </div>
+
       <div className="max-w-screen-2xl mx-auto">
         <Testimonial />
       </div>
+
       <div>
         <EarningOpportunities />
       </div>
+
       <div className="max-w-screen-2xl mx-auto">
         <HowItWorks />
       </div>
+
       <div>
         <CallToActionSection />
       </div>
