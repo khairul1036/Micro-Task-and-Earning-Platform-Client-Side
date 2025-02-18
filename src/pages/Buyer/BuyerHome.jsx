@@ -8,6 +8,20 @@ import { IoEyeOutline } from "react-icons/io5";
 import toast from "react-hot-toast";
 import Loading from "../../components/Loading";
 
+import { FaTasks, FaUsers, FaDollarSign } from "react-icons/fa";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
+
 const BuyerHome = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -53,11 +67,111 @@ const BuyerHome = () => {
     setSelectedSubmission(null); // Clear selected submission when modal is closed
   };
 
+  // Line Chart Data (Example: Monthly Earnings)
+  const lineChartData = [
+    { month: "Jan", earnings: 500 },
+    { month: "Feb", earnings: 700 },
+    { month: "Mar", earnings: 900 },
+    { month: "Apr", earnings: 1100 },
+    { month: "May", earnings: 1300 },
+    { month: "Jun", earnings: 1500 },
+  ];
+
+  // Pie Chart Data (Task Distribution)
+  const pieChartData = [
+    { name: "Completed", value: 70 },
+    { name: "Pending", value: 30 },
+  ];
+  const COLORS = ["#2ECC71", "#E74C3C"];
+
   if (isLoading) return <Loading />;
 
   return (
     <div className="p-6">
-      <h2 className="text-lg font-medium text-gray-800 pb-5">Your States</h2>
+      <div className="max-w-screen-2xl mx-auto py-8 px-5">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+          Dashboard Overview
+        </h2>
+
+        {/* Stats Overview Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="bg-white p-6 rounded-lg shadow-md flex items-center gap-4">
+            <FaTasks className="text-teal-500 text-3xl" />
+            <div>
+              <p className="text-gray-500">Total Tasks</p>
+              <h3 className="text-2xl font-semibold">{data?.totalTasks}</h3>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow-md flex items-center gap-4">
+            <FaUsers className="text-green-500 text-3xl" />
+            <div>
+              <p className="text-gray-500">Total Pending Tasks</p>
+              <h3 className="text-2xl font-semibold">
+                {data?.totalPendingTasks}
+              </h3>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow-md flex items-center gap-4">
+            <FaDollarSign className="text-yellow-500 text-3xl" />
+            <div>
+              <p className="text-gray-500">Total Payment</p>
+              <h3 className="text-2xl font-semibold">${data?.totalPayment}</h3>
+            </div>
+          </div>
+        </div>
+
+        {/* Charts Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+          {/* Line Chart (Earnings Trend) */}
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold mb-4">Earnings Trend</h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={lineChartData}>
+                <XAxis dataKey="month" />
+                <YAxis />
+                <CartesianGrid strokeDasharray="3 3" />
+                <Tooltip />
+                <Line
+                  type="monotone"
+                  dataKey="earnings"
+                  stroke="#3498DB"
+                  strokeWidth={2}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Pie Chart (Task Completion) */}
+          <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
+            <h3 className="text-xl font-semibold mb-4">Task Completion</h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={pieChartData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={50}
+                  outerRadius={100}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {pieChartData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
+
+      {/* <h2 className="text-lg font-medium text-gray-800 pb-5">Your States</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 text-white">
         <div className="bg-orange-500 shadow-md rounded-lg p-4">
           <h3>Total Tasks</h3>
@@ -71,7 +185,7 @@ const BuyerHome = () => {
           <h3>Total Payment</h3>
           <h2 className="text-2xl font-bold">{data?.totalPayment}</h2>
         </div>
-      </div>
+      </div> */}
 
       {/* Show data in table format */}
       <section className="container px-4 mx-auto pt-12">
