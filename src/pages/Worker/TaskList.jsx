@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -15,20 +16,41 @@ const TaskList = () => {
     },
   });
 
+  const [sortOrder, setSortOrder] = useState("asc"); // Default sorting: ascending
+
+  // Sorting function
+  const sortedTasks = [...allTask].sort((a, b) => {
+    return sortOrder === "asc"
+      ? a.payable_amount - b.payable_amount
+      : b.payable_amount - a.payable_amount;
+  });
+
   if (isLoading) return <Loading />;
 
   return (
-    <div className="max-w-screen-2xl mx-auto py-8">
+    <div className="max-w-screen-2xl mx-auto py-8 px-5">
       {allTask?.length === 0 ? (
         <p className="flex justify-center">No Task Available</p>
       ) : (
         <>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-            Available Tasks
-          </h2>
+          <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+            <h2 className="text-2xl font-semibold text-gray-800 pb-5 md:pb-0">
+              Available Tasks
+            </h2>
+            {/* Sorting Dropdown */}
+            <select
+              className="px-4 py-2 border rounded-md"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+            >
+              <option value="asc">Sort by Price: Low to High</option>
+              <option value="desc">Sort by Price: High to Low</option>
+            </select>
+          </div>
+
           {/* Task Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {allTask.map((task) => (
+            {sortedTasks.map((task) => (
               <div
                 key={task._id}
                 className="bg-white rounded-lg p-6 transition-all ease-in-out duration-300 hover:border hover:border-deepTeal hover:scale-105"
