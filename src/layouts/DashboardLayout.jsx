@@ -97,7 +97,7 @@ const DashboardLayout = () => {
                 <Outlet />
               </div>
 
-              <Footer />
+              {/* <Footer /> */}
             </div>
           </div>
         </div>

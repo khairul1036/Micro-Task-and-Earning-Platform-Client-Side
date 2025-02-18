@@ -36,6 +36,20 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
+          to={"/tasklist"}
+          className={({ isActive }) =>
+            `hover:text-teal-600 ${
+              isActive
+                ? "text-teal-600 font-semibold"
+                : "text-gray-600 dark:text-gray-50"
+            }`
+          }
+        >
+          Task List
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to={"https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-khairul1036"}
           className={({ isActive }) =>
             `hover:text-teal-600 ${
@@ -68,8 +82,8 @@ const Navbar = () => {
 
       <li>
         {user?.email && (
-          <button onClick={logOut} className="text-2xl text-gray-600">
-            <IoIosLogOut />
+          <button onClick={logOut} className="text-gray-600">
+            <span>Logout</span><IoIosLogOut className="text-2xl"/>
           </button>
         )}
       </li>
@@ -77,7 +91,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 sticky z-50">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

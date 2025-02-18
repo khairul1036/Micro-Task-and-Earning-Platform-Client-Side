@@ -52,7 +52,7 @@ const TaskList = () => {
                   Earn: <FaCoins /> {task.payable_amount}
                 </p>
 
-                <Link to={`/dashboard/task-details/${task._id}`}>
+                <Link to={`/task-details/${task._id}`}>
                   <button className="w-full px-4 py-2 mt-4 text-sm rounded-full font-bold text-deepTeal border-2 border-deepTeal bg-transparent transition-all ease-in-out duration-300 hover:bg-deepTeal hover:text-white">
                     View Details
                   </button>

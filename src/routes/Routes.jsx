@@ -40,6 +40,28 @@ const router = createBrowserRouter([
         path: "/registration",
         element: <Register />,
       },
+      {
+        // path: "/dashboard/tasklist",
+        path: "/tasklist",
+        element: (
+          // <PrivateRoute>
+          //   <WorkerRoute>
+              <TaskList />
+          //   </WorkerRoute>
+          // </PrivateRoute>
+        ),
+      },
+      {
+        // path: "/dashboard/task-details/:id",
+        path: "/task-details/:id",
+        element: (
+          <PrivateRoute>
+          {/* //   <WorkerRoute> */}
+              <TaskDetails />
+          {/* //   </WorkerRoute> */}
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
@@ -106,26 +128,28 @@ const router = createBrowserRouter([
         ),
       },
       // worker routes
-      {
-        path: "/dashboard/tasklist",
-        element: (
-          <PrivateRoute>
-            <WorkerRoute>
-              <TaskList />
-            </WorkerRoute>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/dashboard/task-details/:id",
-        element: (
-          <PrivateRoute>
-            <WorkerRoute>
-              <TaskDetails />
-            </WorkerRoute>
-          </PrivateRoute>
-        ),
-      },
+      // {
+      //   // path: "/dashboard/tasklist",
+      //   path: "/tasklist",
+      //   element: (
+      //     // <PrivateRoute>
+      //     //   <WorkerRoute>
+      //         <TaskList />
+      //     //   </WorkerRoute>
+      //     // </PrivateRoute>
+      //   ),
+      // },
+      // {
+      //   // path: "/dashboard/task-details/:id",
+      //   path: "/dashboard/task-details/:id",
+      //   element: (
+      //     // <PrivateRoute>
+      //     //   <WorkerRoute>
+      //         <TaskDetails />
+      //     //   </WorkerRoute>
+      //     // </PrivateRoute>
+      //   ),
+      // },
       {
         path: "/dashboard/my-submissions",
         element: (

@@ -65,10 +65,11 @@ const Sidebar = ({ handleSidebar, isSidebarOpen }) => {
               {/* worker */}
               {role === "Worker" && (
                 <>
+                  {/* task router  */}
                   <Link
-                    to="/dashboard/tasklist"
+                    to="/tasklist"
                     className={`py-2 px-4 rounded flex items-center ${
-                      isActive("/dashboard/tasklist")
+                      isActive("/tasklist")
                         ? "bg-gray-700"
                         : "hover:bg-gray-600"
                     }`}

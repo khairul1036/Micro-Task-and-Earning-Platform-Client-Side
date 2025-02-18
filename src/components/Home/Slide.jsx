@@ -22,7 +22,7 @@ const Slide = ({ videoUrl, heading, text }) => {
             <p className="text-sm text-white lg:text-lg px-5">{text}</p>
           </div>
           <br />
-          <Link to={"/dashboard/tasklist"} className="flex justify-center">
+          <Link to={"/tasklist"} className="flex justify-center">
             <button className="flex items-center gap-2 px-5 py-4 mt-4 text-sm font-medium text-white bg-deepTeal hover:bg-teal-700 capitalize transition-colors duration-300 transform rounded-md lg:w-auto focus:outline-none focus:bg-gray-500">
               Find Task <FaArrowRight className="text-xl" />
             </button>
