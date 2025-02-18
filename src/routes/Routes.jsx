@@ -21,6 +21,7 @@ import ManageTasks from "../pages/Admin/ManageTasks";
 import HomeShowRoleBase from "../components/HomeShowRoleBase";
 import WorkerRoute from "./WorkerRoute";
 import NotFound from "../pages/NotFound/NotFound";
+import MyProfile from "../pages/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
         element: (
           // <PrivateRoute>
           //   <WorkerRoute>
-              <TaskList />
+          <TaskList />
           //   </WorkerRoute>
           // </PrivateRoute>
         ),
@@ -56,9 +57,9 @@ const router = createBrowserRouter([
         path: "/task-details/:id",
         element: (
           <PrivateRoute>
-          {/* //   <WorkerRoute> */}
-              <TaskDetails />
-          {/* //   </WorkerRoute> */}
+            {/* //   <WorkerRoute> */}
+            <TaskDetails />
+            {/* //   </WorkerRoute> */}
           </PrivateRoute>
         ),
       },
@@ -76,6 +77,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomeShowRoleBase />,
+      },
+      {
+        path: "/dashboard/my-profile",
+        element: (
+          <PrivateRoute>
+            <MyProfile></MyProfile>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/add-new-task",

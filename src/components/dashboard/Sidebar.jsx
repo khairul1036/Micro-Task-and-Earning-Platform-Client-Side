@@ -12,6 +12,7 @@ import {
   FaTimes,
   FaUserCog,
 } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 import useAuth from "../../hooks/useAuth";
 import useRole from "../../hooks/useRole";
 import { IoIosArrowBack, IoMdClose } from "react-icons/io";
@@ -179,7 +180,19 @@ const Sidebar = ({ handleSidebar, isSidebarOpen }) => {
                   </Link>
                 </>
               )}
+
+              {/* profile page route  */}
+            <Link
+              to="/dashboard/my-profile"
+              className={`py-2 px-4 rounded flex items-center ${
+                isActive("/tasklist") ? "bg-gray-700" : "hover:bg-gray-600"
+              }`}
+            >
+              <CgProfile className="mr-3" />
+              Profile
+            </Link>
             </div>
+
 
             {/* Optional Logout Section */}
             <div className="px-5 py-3 space-y-5">
